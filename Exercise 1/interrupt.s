@@ -234,20 +234,28 @@ _reset:
    	
    	str r0, [r2]
    	str r0, [r3]
-	   	
-	/**MAIN PROGRAM**/ 
+   	
+   	
+   	/** ENABLE ENERGY MODE **/ 
+
+	// MACROS
+	EMU_BASE = 0x400C6000
+	EMU_CTRL = 0x000	
+	SCR_BASE = 0xE000ED10	
 	
-
-		// MACROS
-		GPIO_PA_DOUT  = 0x00C  			//Offset for setting led light
-		GPIO_PC_DIN   = 0x064			//Offset for reading the imput
-		LEDS_OFF      = 0x0000ff00
-		LEDS_ON	      = 0xffff00ff
-
+	// Enable energy mode 1
+	ldr r0, =EMU_BASE
+	ldr r1, =0
+	str r1, [r0]
+	
+	ldr r0, =SCR_BASE
+	ldr r1, =0
+	lsl r1, #2
+	str r1, [r0]
 		
-
-
-
+	wfi 		// low power mode
+	  	
+	
 	/////////////////////////////////////////////////////////////////////////////
 	//
   	// GPIO handler (LEDs are GPIO 8-15 of PortA)
@@ -277,16 +285,20 @@ gpio_handler:
 	ldr r0, [r1,#GPIO_PA_DOUT]
 
 	//Shift to the left 1 positions
-	lsl r0, r0, #1
+	lsl r0, r0, #8
 
 	// store new value
 	ldr r1, =LEDS_OFF
 	str r0, [r1, #GPIO_PA_DOUT]  
-  	    
+  	
+  	wfi			// low power mode
 	    
 	/////////////////////////////////////////////////////////////////////////////
 	
         .thumb_func
 dummy_handler:  
         b .  // do nothing
+        
+    
+
 
