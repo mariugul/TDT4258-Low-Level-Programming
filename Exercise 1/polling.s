@@ -173,12 +173,14 @@ _reset:
 	   	// store new value in GPIO_BASE
 	   	str r3, [r1, #GPIO_PC_DOUT]
 	   	
+
+        
 	/**MAIN PROGRAM**/ 
 	
 
 		// MACROS
 		GPIO_PA_DOUT  = 0x00C  			//Offset for setting led light
-		GPIO_PC_DIN   = 0x064			//Offset for reading the imput
+		GPIO_PC_DIN   = 0x064			//Offset for reading the input
 		LEDS_OFF      = 0x0000ff00
 		LEDS_ON	      = 0xffff00ff
 loop:	
@@ -192,6 +194,8 @@ loop:
 		// store new value
 		str r0, [r1, #GPIO_PA_DOUT]
 		b loop
+
+        
 
 
 	/////////////////////////////////////////////////////////////////////////////

@@ -173,6 +173,68 @@ _reset:
 	   	// store new value in GPIO_BASE
 	   	str r3, [r1, #GPIO_PC_DOUT]
 	   	
+	/**ENABLE INTERRUPTS**/
+	
+	ISERO    = 0XE000e100
+	SET_PINS = 0x802
+					
+	// load base address
+	ldr r1, =ISERO
+	   	
+	// set bits for GPIO_BASE
+	ldr r3, =SET_PINS
+	   	
+	// store new value in GPIO_BASE
+	str r3, [r1]
+	
+	
+	/**SET GPIO_EXTIPSELL**/
+   	
+	// MACROS
+	GPIO_EXTIPSELL = 0x100
+	SET_PINS 	  = 0x22222222
+				
+	// load base address
+   	ldr r1, =GPIO_BASE
+   	
+   	// set bits for GPIO_BASE
+   	ldr r3, =SET_PINS
+   	
+   	// store new value in GPIO_BASE
+   	str r3, [r1, #GPIO_EXTIPSELL]
+   	
+   	
+   	/**SET GPIO_EXTIFALL and GPIO_EXTIRISE and GPIO_IEN**/
+   	// MACROS
+	GPIO_EXTIFALL = 0x10c
+	GPIO_EXTIRISE = 0x108
+	GPIO_IEN      = 0x110
+	SET_PINS 	  = 0xff
+				
+	// load base address
+   	ldr r1, =GPIO_BASE
+   	
+   	// set bits for GPIO_BASE
+   	ldr r3, =SET_PINS
+   	
+   	// store new value in GPIO_BASE
+   	str r3, [r1, #GPIO_EXTIFALL]
+   	str r3, [r1, #GPIO_EXTIRISE]
+   	str r3, [r1, #GPIO_IEN]
+   	
+   	
+   	/**Put adress of interrupt handler in vector table**/
+   	IRQ0 = 0x44
+   	X = 0x6c
+   	
+   	//Put adress
+   	ldr r0, =gpio_handler
+   	ldr r2, =IRQ0
+   	ldr r3, =X
+   	
+   	str r0, [r2]
+   	str r0, [r3]
+	   	
 	/**MAIN PROGRAM**/ 
 	
 
@@ -181,17 +243,9 @@ _reset:
 		GPIO_PC_DIN   = 0x064			//Offset for reading the imput
 		LEDS_OFF      = 0x0000ff00
 		LEDS_ON	      = 0xffff00ff
-loop:	
-		// load base address
-		ldr r1, =GPIO_BASE
+
 		
-		//Load input
-		ldr r0, [r1,#GPIO_PC_DIN]
-		//Shift to the left 8 positions
-		lsl r0, r0, #8
-		// store new value
-		str r0, [r1, #GPIO_PA_DOUT]
-		b loop
+
 
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -203,13 +257,32 @@ loop:
 	
         .thumb_func
 gpio_handler:  
-			b . // do nothing    
-	   
+
+	GPIO_PA_DOUT  = 0x00C  			//Offset for setting led light
+	GPIO_PC_DIN   = 0x064			//Offset for reading the imput
+	LEDS_OFF      = 0x0000ff00
+	LEDS_ON	      = 0xffff00ff
+	GPIO_IFC	  = 0x11c
+	GPIO_IF 	  = 0x114
+
+	// load base address
+	ldr r1, =GPIO_BASE
+		
+		
+	#Cleaning interrupt:
+	ldr r0, [r1,#GPIO_IF]
+	str r0, [r1,#GPIO_IFC]
+	
+	//Load input
+	ldr r0, [r1,#GPIO_PA_DOUT]
+
+	//Shift to the left 1 positions
+	lsl r0, r0, #1
+
+	// store new value
+	ldr r1, =LEDS_OFF
+	str r0, [r1, #GPIO_PA_DOUT]  
   	    
-	    
-	    
-	    
-	    
 	    
 	/////////////////////////////////////////////////////////////////////////////
 	
