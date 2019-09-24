@@ -254,6 +254,7 @@ _reset:
 	str r1, [r0]
 		
 	wfi 		// low power mode
+    b main 
 	  	
 	
 	/////////////////////////////////////////////////////////////////////////////
@@ -292,6 +293,7 @@ gpio_handler:
 	str r0, [r1, #GPIO_PA_DOUT]  
   	
   	wfi			// low power mode
+    b main
 	    
 	/////////////////////////////////////////////////////////////////////////////
 	
@@ -299,6 +301,9 @@ gpio_handler:
 dummy_handler:  
         b .  // do nothing
         
+main: 
+    // do nothing
+b main
     
 
 
