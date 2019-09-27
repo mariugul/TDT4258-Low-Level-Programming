@@ -182,13 +182,13 @@ _reset:
         .thumb_func
 gpio_handler:  
 	
-	//
 	button1:
 	ldr r0, =GPIO_PC_BASE						// load base address
 	ldr r1, [r0, #GPIO_PC_DIN]					// load button values
-	mov r2, #0x00
-	cmp r1, r2
-	bge clean
+    ldr r2, =0b11111110                         // mask for button 1
+    orr r3, r2, r1                              // or with the mask 
+	cmp r3, r2                                  // if the mask equals the result
+	bneq clean
 	
 	
 	ldr r1, =GPIO_PA_BASE						// load base address
