@@ -83,241 +83,127 @@
         .thumb_func
 _reset: 
 	/** ENABLE GPIO CLOCK IN CMU**/
-	
-	    // MACROS
-	    CMU_BASE 		 	 = 0x400c8000 		// base address
-	    CMU_HFPERCLKEN0 	 = 0x044			// offset from base
-		CMU_HFPERCLKEN0_GPIO = 13				// bit to enable GPIO
-	    
 	        
-	    // load CMU base address
-	    ldr r1, =CMU_BASE
-	    
-	    // load current value of HFPERCLK ENABLE
-	    ldr r2, [r1, #CMU_HFPERCLKEN0]	
-	    
-	    // set bit for GPIO clk
-	    mov r3, #1								// move 1 into r3
+	    ldr r1, =CMU_BASE						// load CMU base address
+	    ldr r2, [r1, #CMU_HFPERCLKEN0]			// load current value of HFPERCLK ENABLE
+	    mov r3, #1								// move value 1 into r3
 	    lsl r3, r3, #CMU_HFPERCLKEN0_GPIO		// create the GPIO clk enable mask
-	    orr r2, r2, r3							// OR the mask with the current values so
-	    										// the settings are not lost
-	    
-	    // store the new value in CMU_HFPERCLKEN0
-	    str r2, [r1, #CMU_HFPERCLKEN0]
-	    
+	    orr r2, r2, r3							// OR the mask with the current values
+	    str r2, [r1, #CMU_HFPERCLKEN0]			// store the new value in CMU_HFPERCLKEN0
 	    
 	    
 	/**SET HIGH DRIVE STRENGTH (20mA pins)**/ 
 	   	
-	   	// MACROS
-	   	GPIO_BASE    = 0x40006000
-	   	GPIO_PA_CTRL = 0x000         // therefore not needed
-	   	HIGH_DRIVE   = 0x2
-	  	
+	   	LOWEST   = 0x1							// 0.1mA drive current
+	    LOW      = 0x3 							// 1mA drive current
+	    STANDARD = 0x0							// 6mA drive current
+	   	HIGH     = 0x2							// 20mA drive current
 	   	
-	   	// load base address
-	   	ldr r1, =GPIO_BASE
-	   	
-	   	// load the HIGH drive value
-	   	ldr r2, =HIGH_DRIVE
-	   	
-	   	// store HIGH drive
-	   	str r2, [r1]
-	   	
+	   	ldr r1, =GPIO_PA_BASE					// load base address
+	   	ldr r2, =LOW							// load the HIGH drive value
+	   	str r2, [r1]							// store HIGH drive
 	   	
 	   	
 	/**SET PINS 8-15 to OUTPUT**/
-		
-		// MACROS
-		GPIO_PA_MODEH = 0x008
-		SET_PINS 	  = 0x55555555
-					
-		// load base address
-	   	ldr r1, =GPIO_BASE
+	
+	   	ldr r1, =GPIO_PA_BASE					// load base address
+	   	mov r3, #0x55555555						// load value
+	   	str r3, [r1, #GPIO_MODEH]				// store new value in GPIO_MODEH
 	   	
-	   	// set bits for GPIO_BASE
-	   	ldr r3, =SET_PINS
-	   	
-	   	// store new value in GPIO_BASE
-	   	str r3, [r1, #GPIO_PA_MODEH]
-	   	
-	   	
+		// initialize LEDs as off
+		mov r0, #0xFF00							// Load "off" bits 
+		str r0, [r1, #GPIO_PA_DOUT]				// Store new value in GPIO_PA_DOUT
+		  
 	   	
     /**SET PINS 0-7 to INPUT**/
-		
-		// MACROS
-		GPIO_PC_MODEL = 0x04c
-		SET_PINS 	  = 0x33333333
 					
-		// load base address
-	   	ldr r1, =GPIO_BASE
-	   	
-	   	// set bits for GPIO_BASE
-	   	ldr r3, =SET_PINS
-	   	
-	   	// store new value in GPIO_BASE
-	   	str r3, [r1, #GPIO_PC_MODEL]
-
+	   	ldr r1, =GPIO_PA_BASE					// load base address
+	   	mov r3, #0x33333333						// load value
+	   	str r3, [r1, #GPIO_PC_MODEL]				// store new value in GPIO_MODEL
 
 
 	/**ENABLE INTERNAL PULL-UP**/
-   	
-		// MACROS
-		GPIO_PC_DOUT = 0x054
-		SET_PINS 	  = 0xff
-					
-		// load base address
-	   	ldr r1, =GPIO_BASE
-	   	
-	   	// set bits for GPIO_BASE
-	   	ldr r3, =SET_PINS
-	   	
-	   	// store new value in GPIO_BASE
-	   	str r3, [r1, #GPIO_PC_DOUT]
-	   	
-	   
+   						
+	   	ldr r1, =GPIO_PA_BASE					// load base address
+	   	ldr r3, =0xFF 							// load value
+	   	str r3, [r1, #GPIO_PC_DOUT]				// store new value in GPIO_DOUT	   	
 	
 	
 	/**ENABLE INTERRUPTS**/
-
-	/**SET GPIO_EXTIPSELL**/
-
-	// MACROS
-	GPIO_EXTIPSELL = 0x100
-	SET_PINS 	  = 0x22222222
-				
-	// load base address
-   	ldr r1, =GPIO_BASE
-   	
-   	// set bits for GPIO_BASE
-   	ldr r3, =SET_PINS
-   	
-   	// store new value in GPIO_BASE
-   	str r3, [r1, #GPIO_EXTIPSELL]
-   	
-  	
-   	/**SET GPIO_EXTIFALL and GPIO_EXTIRISE and GPIO_IEN**/
-
-   	// MACROS
-	GPIO_EXTIFALL = 0x10c
-	GPIO_EXTIRISE = 0x108
-	GPIO_IEN      = 0x110
-	
-   	// set bits for GPIO_BASE
-   	mov r3, #0xFF
-   
-   	// store new value in GPIO_BASE
-   	str r3, [r1, #GPIO_EXTIFALL]
-   	str r3, [r1, #GPIO_EXTIRISE]
-   	str r3, [r1, #GPIO_IEN]
-
- 
- 	
-
-	ISERO    = 0XE000e100
-	
-	// load base address
-	ldr r1, =ISERO
-
-	// set bits for GPIO_BASE
-	movw r3, #0x802	// Set pins
+		
+	   	ldr r1, =GPIO_PA_BASE					// load base address
+	   	ldr r3, =0x22222222						// load value
+	   	str r3, [r1, #GPIO_EXTIPSELL]			// store new value in GPIO_EXTISPELL
 	   	
-	// store new value in GPIO_BASE
-	str r3, [r1]
+	   	mov r3, #0xFF
+	   	str r3, [r1, #GPIO_EXTIFALL]			// store new value in EXTIFALL
+	   	str r3, [r1, #GPIO_EXTIRISE]			// store new value in EXTIRISE
+	   	str r3, [r1, #GPIO_IEN]					// store new value in IEN
 
-
+		ldr r1, =ISER0							// load base address	
+		movw r3, #0x802							// 
+		str r3, [r1]							// store new value in ISER0
 
    	
-   	/** ENABLE ENERGY MODE **/ 
+   	/** ENABLE ENERGY MODE 3 **/ 
+   	
+		ldr r0, =EMU_BASE						// load base
+		mov r1, #0								// load value
+		str r1, [r0]							// store value in EMU_BASE
 	
-	// MACROS
-	EMU_BASE = 0x400C6000
-	EMU_CTRL = 0x000	
-	SCR_BASE = 0xE000ED10	
-	
-	// Enable energy mode 2
-
-	ldr r0, =EMU_BASE
-	mov r1, #0
-	str r1, [r0]
-	
-	ldr r0, =SCR_BASE
-	mov r1, #1
-	lsl r1, #2
-	str r1, [r0]
-	
-	ldr r0, =EMU_BASE
-	mov r1, #0
-	str r1, [r0]
-	
-	ldr r0, =EMU_BASE
-	mov r1, #0
-	lsl r1, #1
-	str r1, [r0]
-	
-	ldr r0, =0x028 // load CMU_LFCLKSEL
-	mov r1, #0
-	mov r2, #0
-	lsl r1, r1, #16
-	lsl r1, r2, #4
-	str r1, [r0]
-	
-
-	
-	
-	
-	// INITIALIZE LEDS AS OFF
-	//Load input
-	mov r0, #0xFF
-	
-	// Load GPIO_BASE
-	ldr r1, =GPIO_PA_BASE
+		ldr r3, =SCR							// load address
+		mov r1, #1								// load value
+		lsl r1, #2								// left shift into correct position
+		str r1, [r3]							// store in SCR
 		
-	//Shift to the left 8 positions
-	lsl r0, r0, #8
+		// optimize this block
+		mov r1, #0								// load value
+		str r1, [r0]							// store into EMU_BASE
+		lsl r1, #1								// left shift into correct position
+		str r1, [r0]							// store into EMU_BASE
 		
-	// store new value
-	str r0, [r1, #GPIO_DOUT]
+		// optimize this block
+		ldr r0, =0x028 							// load CMU_LFCLKSEL
+		mov r1, #0							
+		mov r2, #0
+		lsl r1, r1, #16
+		lsl r1, r2, #4
+		str r1, [r0]
 	  	
-	
-	b main 		// jump to main
+	b main 										// jump to main
 	
 	/////////////////////////////////////////////////////////////////////////////
 	//
-  	// GPIO handler (LEDs are GPIO 8-15 of PortA)
+  	// GPIO handler (Interrupt handler)
   	// The CPU will jump here when there is a GPIO interrupt
 	//
 	/////////////////////////////////////////////////////////////////////////////
 	
         .thumb_func
 gpio_handler:  
-
-	GPIO_PA_DOUT  = 0x00C  			//Offset for setting led light
-	GPIO_PC_DIN   = 0x064			//Offset for reading the imput
-	LEDS_OFF      = 0x0000ff00
-	LEDS_ON	      = 0xffff00ff
-	GPIO_IFC	  = 0x11c
-	GPIO_IF 	  = 0x114
-
-	// load base address
-	ldr r1, =GPIO_BASE
 	
-	//Load input
-	ldr r0, [r1,#GPIO_PA_DOUT]
-
-	//Shift to the left 1 positions
-	lsl r0, r0, #1
-
-	// store new value
-	// ldr r3, =LEDS_ON
-	str r0, [r1, #GPIO_PA_DOUT]  
+	//
+	button1:
+	ldr r0, =GPIO_PC_BASE						// load base address
+	ldr r1, [r0, #GPIO_PC_DIN]					// load button values
+	mov r2, #0x00
+	cmp r1, r2
+	bge clean
 	
+	
+	ldr r1, =GPIO_PA_BASE						// load base address
+	ldr r0, [r1, #GPIO_PA_DOUT]					// load offset
+	lsl r0, r0, #1								// shift to the left 1 positions
+	str r0, [r1, #GPIO_PA_DOUT]  				// store new value
+	
+	
+	clean:
 	#Cleaning interrupt:
 	ldr r0, [r1,#GPIO_IF]
 	str r0, [r1,#GPIO_IFC]
+
 	
-	
-	bx lr  // branch back to link register  	
+	bx lr  										// continue where left off  	
 
 	/////////////////////////////////////////////////////////////////////////////
 	
@@ -334,7 +220,15 @@ dummy_handler:
 	
 main:	
 		
-    	wfi 		// low power mode
-    	b main
+    	wfi 									// enter low power mode
+    	b main									// loop main
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
 
 
