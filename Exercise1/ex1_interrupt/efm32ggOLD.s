@@ -6,8 +6,13 @@
 	//
 	/////////////////////////////////////////////////////////////////////////////
 
-
-	      //////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////
+		// CUSTOM
+			
+			LEDS_OFF = 0x0000ff00
+		    LEDS_ON  = 0xffff00ff
+		
+	    //////////////////////////////////////////////////////////////////////
       	// GPIO
 
 	      GPIO_PA_BASE = 0x40006000
@@ -18,26 +23,29 @@
 	      GPIO_PF_BASE = 0x400060b4
 
 	      // register offsets from base address
-	        GPIO_CTRL     = 0x00
-		    GPIO_MODEL    = 0x04
-		    GPIO_MODEH    = 0x08
-		    GPIO_DOUT     = 0x0c
-		    GPIO_DOUTSET  = 0x10
-		    GPIO_DOUTCLR  = 0x14
-		    GPIO_DOUTTGL  = 0x18
-		    GPIO_DIN      = 0x1c
-		    GPIO_PINLOCKN = 0x20
+	      GPIO_CTRL   = 0x00
+        GPIO_PC_MODEL = 0x04c
+        GPIO_MODEH    = 0x008
+        GPIO_DOUT     = 0x00c
+        GPIO_PC_DOUT  = 0x054			// enables internal pull-up
+        GPIO_PA_DOUT  = 0x00c			// changes LED HIGH or LOW
+        GPIO_DOUTSET  = 0x10
+        GPIO_DOUTCLR  = 0x14
+        GPIO_DOUTTGL  = 0x18
+        GPIO_DIN      = 0x1c
+        GPIO_PC_DIN   = 0x064			//Offset for reading the input
+        GPIO_PINLOCKN = 0x20
 
 	      GPIO_BASE = 0x40006100
 
 	      // register offsets from base address
-		    GPIO_EXTIPSELL = 0x00
-		    GPIO_EXTIPSELH = 0x04
-		    GPIO_EXTIRISE  = 0x08
-		    GPIO_EXTIFALL  = 0x0c
-	        GPIO_IEN       = 0x10
-	        GPIO_IF        = 0x14
-	        GPIO_IFC       = 0x1c
+        GPIO_EXTIPSELL = 0x00
+        GPIO_EXTIPSELH = 0x04
+        GPIO_EXTIRISE  = 0x08
+        GPIO_EXTIFALL  = 0x0c
+	      GPIO_IEN       = 0x10
+	      GPIO_IF        = 0x14
+	      GPIO_IFC       = 0x1c
 
 	      //////////////////////////////////////////////////////////////////////
       	// CMU

@@ -183,20 +183,20 @@ _reset:
 	
         .thumb_func
 gpio_handler:  
-
+/*
 	ldr r0, =GPIO_PC_BASE						// load base address
 	ldr r1, [r0, #GPIO_DIN]					// load button values
 	lsl r1, r1, #8
 	ldr r2, =GPIO_PA_BASE
 	str r1, [r2, #GPIO_DOUT]
-
+*/
 	ldr r1, =GPIO_BASE
 	ldr r2, [r1,#GPIO_IF]
 	str r2, [r1,#GPIO_IFC]
 	
-    //ldr r1, =GPIO_PA_BASE					// load base address
-	//ldr r3, [r1, #GPIO_DIN]
-	//eor r3, r3, r3
+    ldr r1, =GPIO_PA_BASE					// load base address
+	ldr r3, [r1, #GPIO_DIN]
+	eor r3, r3, r3
 
  	bx lr
 /*
