@@ -117,7 +117,7 @@ _reset:
 	   	
     /**SET PINS 0-7 to INPUT**/
 					
-	   	ldr r1, =GPIO_PA_BASE					// load base address
+	   	ldr r1, =GPIO_PC_BASE					// load base address
 	   	ldr r3, =0x33333333						// load value
 	   	str r3, [r1, #GPIO_MODEL]				// store new value in GPIO_MODEL
 
@@ -140,38 +140,18 @@ _reset:
 	   	
 	   	ldr r3, =0xFF
 	   	str r3, [r1, #GPIO_EXTIFALL]			// store new value in EXTIFALL
+	   	ldr r3, =0x00
 	   	str r3, [r1, #GPIO_EXTIRISE]			// store new value in EXTIRISE
+	   	ldr r3, =0xFF
 	   	str r3, [r1, #GPIO_IEN]					// store new value in IEN
 
 		ldr r1, =ISER0							// load base address	
 		ldr r3, =0x802							// 
 		str r3, [r1]							// store new value in ISER0
 
-   	
-   	/** ENABLE ENERGY MODE 3 **/ 
-   	/*
-		ldr r0, =EMU_BASE						// load base
-		mov r1, #0								// load value
-		str r1, [r0]							// store value in EMU_BASE
-	*/
 		ldr r3, =SCR							// load address
 		mov r1, #0x6								// load value
 		str r1, [r3]							// store in SCR
-	/*
-		// optimize this block
-		mov r1, #0								// load value
-		str r1, [r0]							// store into EMU_BASE
-		lsl r1, #1								// left shift into correct position
-		str r1, [r0]							// store into EMU_BASE
-		
-		// optimize this block
-		ldr r0, =0x028 							// load CMU_LFCLKSEL
-		mov r1, #0							
-		mov r2, #0
-		lsl r1, r1, #16
-		lsl r1, r2, #4
-		str r1, [r0]
-  	*/
 	b main 										// jump to main
 	
 	/////////////////////////////////////////////////////////////////////////////
@@ -184,7 +164,7 @@ _reset:
         .thumb_func
 gpio_handler:  
 
-	ldr r0, =GPIO_PC_BASE						// load base address
+	ldr r0, =GPIO_PC_BASE					// load base address
 	ldr r1, [r0, #GPIO_DIN]					// load button values
 	lsl r1, r1, #8
 	ldr r2, =GPIO_PA_BASE
@@ -199,31 +179,7 @@ gpio_handler:
 	//eor r3, r3, r3
 
  	bx lr
-/*
-	//bkpt
-	button1:
-	ldr r0, =GPIO_PC_BASE						// load base address
-	ldr r1, [r0, #GPIO_PC_DIN]					// load button values
-    ldr r2, =0b00000001                         // mask for button 1
-    and r3, r2, r1                              // or with the mask 
-	cmp r3 , #0                                 // if the mask equals the result
-	bne clean
-	
-	
-	ldr r1, =GPIO_PA_BASE						// load base address
-	ldr r0, [r1, #GPIO_PA_DOUT]					// load offset
-	lsl r0, r0, #1								// shift to the left 1 positions
-	str r0, [r1, #GPIO_PA_DOUT]  				// store new value
-	
-	
-	clean:
-	ldr r1, =GPIO_BASE
-	#Cleaning interrupt:
-	ldr r0, [r1,#GPIO_IF]
-	str r0, [r1,#GPIO_IFC]
 
-	bx lr  										// continue where left off  	
-*/
 	/////////////////////////////////////////////////////////////////////////////
 	
         .thumb_func
