@@ -150,10 +150,24 @@ _reset:
 		str r3, [r1]							// store new value in ISER0
 
 
-	/**ENABLE ENERGY MODE**/
-		ldr r3, =SCR							// load address
-		mov r1, #0x6							// load value
-		str r1, [r3]							// store in SCR
+	/**ENABLE ENERGY MODE (DEEP SLEEP)**/
+		
+		// set in energy mode 2
+		ldr r3, =SCR							// load SCR address
+		mov r1, #0x6							// SLEEPDEEP & SLEEPONEXIT
+		str r1, [r3]							// store in SCR register
+		
+		// power down ram
+		ldr r1, =EMU_BASE						// load EMU base address
+		ldr r2, =EMU_MEMCTRL					// load offset address
+		ldr r3, =7								// power down value
+		str r3, [r1, #EMU_MEMCTRL]				// power down RAM blocks 1-3
+		
+		// turn off clocks
+		ldr r0, =CMU_BASE						// load base address
+		ldr r1, =CMU_LFCLKSEL 					// load offset
+		mov r2, #0								// value is zero
+		str r2, [r0, #CMU_LFCLKSEL]				// store in register
 		
 	b main 										// jump to main
 	
@@ -217,10 +231,9 @@ dummy_handler:
 	/////////////////////////////////////////////////////////////////////////////
 	
 main:	
-    	wfi 								// enter low power mode
+    	wfi		 	// enter low power mode	
     	
-    	// should never reach this
-    	b main								// loop main
+    	b . 		// should never reach this
     	
     	
     	

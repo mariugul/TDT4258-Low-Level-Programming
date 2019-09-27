@@ -46,8 +46,8 @@
 
         CMU_HFPERCLKDIV = 0x008
         CMU_HFPERCLKEN0 = 0x044
-
         CMU_HFPERCLKEN0_GPIO = 13
+        CMU_LFCLKSEL = 0x028
 
 	      //////////////////////////////////////////////////////////////////////
 	      // NVIC
@@ -74,6 +74,7 @@
 	      EMU_BASE = 0x400c6000
 
         EMU_CTRL = 0x000
+        EMU_MEMCTRL = 0x004
 
 	      //////////////////////////////////////////////////////////////////////
         // System Control Block
