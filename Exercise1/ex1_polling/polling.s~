@@ -101,7 +101,7 @@ _reset:
 	   	HIGH     = 0x2							// 20mA drive current
 	   	
 	   	ldr r1, =GPIO_PA_BASE					// load base address
-	   	ldr r2, =HIGH							// load the drive value
+	   	ldr r2, =LOWEST 						// load the drive value
 	   	str r2, [r1, #GPIO_CTRL]				// store drive
 	   	
 	   	
