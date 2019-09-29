@@ -131,23 +131,23 @@ _reset:
 	
 	/**ENABLE INTERRUPTS**/
 		
-		ldr r1, =GPIO_BASE					    // load base address
-		ldr r0, [r1,#GPIO_IF]					// load flag
-		str r0, [r1,#GPIO_IFC]					// store clean
+        ldr r1, =GPIO_BASE                      // load base address
+        ldr r0, [r1,#GPIO_IF]                   // load flag
+        str r0, [r1,#GPIO_IFC]                  // store clean
 		
-	   	ldr r3, =0x22222222						// load value
-	   	str r3, [r1, #GPIO_EXTIPSELL]			// store new value in GPIO_EXTISPELL
+        ldr r3, =0x22222222                     // load value
+        str r3, [r1, #GPIO_EXTIPSELL]           // store in EXTISPELL
 	   	
-	   	ldr r3, =0xFF
-	   	str r3, [r1, #GPIO_EXTIFALL]			// store new value in EXTIFALL
-	   	ldr r3, =0x00
-	   	str r3, [r1, #GPIO_EXTIRISE]			// store new value in EXTIRISE
-	   	ldr r3, =0xFF
-	   	str r3, [r1, #GPIO_IEN]					// store new value in IEN
-
-		ldr r1, =ISER0							// load base address	
-		ldr r3, =0x802							// 
-		str r3, [r1]							// store new value in ISER0
+        ldr r3, =0xFF
+        str r3, [r1, #GPIO_EXTIFALL]            // store EXTIFALL
+        ldr r3, =0x00
+        str r3, [r1, #GPIO_EXTIRISE]            // store in EXTIRISE
+        ldr r3, =0xFF
+        str r3, [r1, #GPIO_IEN]                 // store in IEN
+        
+        ldr r1, =ISER0                          // load base address	
+        ldr r3, =0x802                          // 
+        str r3, [r1]                            // store in ISER0
 
 
 	/**ENABLE ENERGY MODE (DEEP SLEEP)**/
