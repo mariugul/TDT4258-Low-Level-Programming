@@ -2,6 +2,7 @@
 #include <stdbool.h>
 
 #include "efm32gg.h"
+//#include "timer.h"
 
 /*
  * TODO calculate the appropriate sample period for the sound wave(s) you 
