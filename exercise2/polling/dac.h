@@ -2,7 +2,7 @@
 #define __TIMER_H__
 
 
-void timer_init(uint16_t period);
+void dac_init();
 
 
 #endif

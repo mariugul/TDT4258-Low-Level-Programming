@@ -1,0 +1,10 @@
+#ifndef __GPIO_H__		// HEADER GUARD
+#define __GPIO_H__
+
+#include <stdint.h>
+#include <stdbool.h>
+#include "efm32gg.h"
+
+void gpio_init();
+
+#endif

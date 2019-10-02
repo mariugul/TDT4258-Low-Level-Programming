@@ -11,15 +11,10 @@ LDFLAGS=-mcpu=cortex-m3 -mthumb -g -lgcc -lc -lcs3 -lcs3unhosted -lefm32gg -Llib
 ASFLAGS=-mcpu=cortex-m3 -mthumb -g
 LINKERSCRIPT=lib/efm32gg.ld
 
-CFLAGS=-mcpu=cortex-m3 -mthumb -g -std=c99 -Wall
-LDFLAGS=-mcpu=cortex-m3 -mthumb -g -lgcc -lc -lcs3 -lcs3unhosted -ltimer -Llib
-ASFLAGS=-mcpu=cortex-m3 -mthumb -g
-LINKERSCRIPT=lib/timer.ld
-
 polling.bin : polling.elf
 	${OBJCOPY} -O binary $< $@
 
-polling.elf : polling.o timer.o dac.o gpio.o interrupt_handlers.o
+polling.elf : polling.o timer.o dac.o gpio.o interrupt.o
 	${LD} -T ${LINKERSCRIPT} $^ -o $@ ${LDFLAGS} 
 
 %.o : %.c

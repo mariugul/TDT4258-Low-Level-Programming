@@ -4,7 +4,7 @@
 #include "timer.h"
 
 /** Initialize timer **/
-void timer_init(uint16_t period)
+void Timer_init(uint16_t period)
 {
   *CMU_HFPERCLKEN0 = 0x06;	// Enable clock to timer
   *TIMER1_TOP = period;		// Write the period

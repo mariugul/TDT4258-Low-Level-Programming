@@ -14,7 +14,7 @@ LINKERSCRIPT=lib/efm32gg.ld
 polling.bin : polling.elf
 	${OBJCOPY} -O binary $< $@
 
-polling.elf : polling.o timer.o dac.o gpio.o interrupt_handlers.o
+polling.elf : /lib/polling.o timer.o dac.o gpio.o interrupt.o
 	${LD} -T ${LINKERSCRIPT} $^ -o $@ ${LDFLAGS} 
 
 %.o : %.c
