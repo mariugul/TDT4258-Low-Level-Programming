@@ -3,8 +3,12 @@
 
 #include "efm32gg.h"
 
-void setupDAC()
+void dac_init()
 {
+    *CMU_HFPERCLKEN0 = 0x17;
+	*DAC0_CTRL    = 0x50010;
+	*DAC0_CH0CTRL = 0x01;
+	*DAC0_CH1CTRL = 0x01;
 	/*
 	 * TODO enable and set up the Digital-Analog Converter
 	 * 
@@ -15,8 +19,5 @@ void setupDAC()
 	 * data registers, DAC0_CH0DATA and DAC0_CH1DATA, for example from a
 	 * timer interrupt 
 	 */
-	*CMU_HFPERCLKEN0 = 0x17;
-	*DAC0_CTRL = 0x50010;
-	*DAC0_CH0CTRL = 0x01;
-	*DAC0_CH1CTRL = 0x01;
+	
 }	
