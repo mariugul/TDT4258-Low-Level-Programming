@@ -23,6 +23,7 @@ void setupTimer(uint16_t period)
 	*CMU_HFPERCLKEN0 = 0x06;
 	*TIMER1_TOP = period;
 	*TIMER1_IEN = 0x01;
+	*ISER0 = 0x12;
 	*TIMER1_CMD = 0x01;
 
 
