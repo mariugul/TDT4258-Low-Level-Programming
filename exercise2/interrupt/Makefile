@@ -26,7 +26,7 @@ pretty :
 
 .PHONY : upload
 upload :
-	-eACommander.sh -r --address 0x00000000 -f "ex2.bin" -r
+	-eACommander.sh -r --address 0x00000000 -f "interrupt.bin" -r
 
 .PHONY : clean
 clean :
