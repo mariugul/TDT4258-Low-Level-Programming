@@ -5,11 +5,10 @@
 #include "gpio.h"
 #include "dac.h"
 #include "interrupt.h"
+#include "low_energy.h"
 
 #define  SAMPLE_PERIOD   100	// The period between sound samples, in clock cycles
 #define	 PERIOD 		 10 
-
-
 
 int main (void)
 {
@@ -22,10 +21,8 @@ int main (void)
 	// Loop
 	while (true)
     {
-      *DAC0_CH0DATA = 130;	// What happens here?
-      *DAC0_CH1DATA = 130;
+      sleep();  
     }
-
 	
 	return 0;
 }

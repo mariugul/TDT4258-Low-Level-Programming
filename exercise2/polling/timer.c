@@ -10,5 +10,4 @@ void timer_init(uint16_t period)
   *TIMER1_TOP = period;		// Write the period
   *TIMER1_IEN = 0x01;		// Enable timer interrupt
   *TIMER1_CMD = 0x01;		// Start the timer 
-  *ISER0 = 0x12;			// ??? 
 }		
