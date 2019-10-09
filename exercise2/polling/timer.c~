@@ -3,21 +3,25 @@
 #include "efm32gg.h"
 #include "timer.h"
 
-#define PRESCALER 0x7000000//0xA000000
+#define PRESCALER 0x8000000   //0xA000000
 
-extern int global_var;
 
 /** Initialize timer **/
 void timer_init(uint16_t period)
 {
-  *CMU_HFPERCLKEN0 |= CMU2_HFPERCLKEN0_TIMER1;	// Enable clock to timer
+  	timer_enable_clock();
   	timer_set_prescaler();
   	timer_set_period();
 	timer_enable_interrupt();
 	timer_start();
 	
-	global_var = 0;
 }		
+
+void timer_enable_clock()
+{
+	*CMU_HFPERCLKEN0 |= CMU2_HFPERCLKEN0_TIMER1;	// Enable timer1 clock
+}
+
 
 void timer_set_prescaler()
 {

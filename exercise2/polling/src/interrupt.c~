@@ -3,9 +3,7 @@
 #include "efm32gg.h"
 #include "interrupt.h"
 #include "gpio.h"
-#include "timer.h"
-
-extern int global_var;
+#include "h/timer.h"
 
 
 void nvic_init()			// Enable interrupts

@@ -20,7 +20,6 @@ int main (void)
  	//nvic_init();			
 	timer_init(PRESCALER);		
 	
-	//gpio_leds_on();
 	
 	// Loop
 	while (true)

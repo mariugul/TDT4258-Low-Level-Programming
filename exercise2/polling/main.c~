@@ -1,11 +1,11 @@
 #include <stdint.h>
 #include <stdbool.h>
-#include "efm32gg.h"
-#include "timer.h"
-#include "gpio.h"
-//#include "dac.h"
-#include "interrupt.h"
-//#include "low_energy.h"
+#include "src/efm32gg.h"
+#include "src/timer.h"
+#include "src/gpio.h"
+//#include "src/dac.h"
+#include "src/interrupt.h"
+//#include "src/low_energy.h"
 
 #define  SAMPLE_PERIOD   100	// The period between sound samples, in clock cycles
 #define	 PRESCALER 		 13672 
@@ -20,7 +20,6 @@ int main (void)
  	//nvic_init();			
 	timer_init(PRESCALER);		
 	
-	//gpio_leds_on();
 	
 	// Loop
 	while (true)

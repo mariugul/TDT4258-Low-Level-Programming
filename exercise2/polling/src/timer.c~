@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "efm32gg.h"
-#include "timer.h"
+#include "h/timer.h"
 
 #define PRESCALER 0x8000000   //0xA000000
 

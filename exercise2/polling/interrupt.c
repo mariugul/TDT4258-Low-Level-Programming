@@ -5,8 +5,6 @@
 #include "gpio.h"
 #include "timer.h"
 
-extern int global_var;
-
 
 void nvic_init()			// Enable interrupts
 {
@@ -39,20 +37,7 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler ()
 		state = true;
 	}
 	
-	//static int count = 0;
-	//count++;
-	
-	/*
-	if(count == 13672)
-	{
-		global_var = 1;
-	}
-	if(count == 13672*2)
-	{
-		global_var = 0;
-		count = 0;
-	}
-	*/
+
 	*TIMER1_IFC = 0x1;				// Clear the interrupt flag
 }
 
