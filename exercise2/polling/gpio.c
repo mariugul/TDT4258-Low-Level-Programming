@@ -13,9 +13,8 @@
 #define LOW_DRIVE		0x03
 #define HIGH_DRIVE		0x02
 
-/*
- * function to set up GPIO mode and interrupts
- */
+
+/* Sets up the GPIO functionality */
 void gpio_init()
 {
 	gpio_enable_clock();

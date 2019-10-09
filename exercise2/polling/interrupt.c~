@@ -2,6 +2,10 @@
 #include <stdbool.h>
 #include "efm32gg.h"
 #include "interrupt.h"
+#include "gpio.h"
+#include "timer.h"
+
+extern int global_var;
 
 
 void nvic_init()			// Enable interrupts
@@ -14,6 +18,7 @@ void nvic_init()			// Enable interrupts
    * need TIMER1, GPIO odd and GPIO even interrupt handling for this
    * assignment. 
    */
+   
 }
 
 
@@ -22,13 +27,33 @@ void nvic_init()			// Enable interrupts
  */
 void __attribute__ ((interrupt)) TIMER1_IRQHandler ()
 {
-  /*
-   * TODO feed new samples to the DAC remember to clear the pending
-   * interrupt by writing 1 to TIMER1_IFC 
-   */
-  *DAC0_CH0DATA = 440;
-  *DAC0_CH1DATA = 440;
-  *TIMER1_IFC = 0x1;
+	static bool state = false;
+	if(state)
+	{	
+		gpio_leds_on();
+		state = false;
+	}
+	else
+	{
+		gpio_leds_off();
+		state = true;
+	}
+	
+	//static int count = 0;
+	//count++;
+	
+	/*
+	if(count == 13672)
+	{
+		global_var = 1;
+	}
+	if(count == 13672*2)
+	{
+		global_var = 0;
+		count = 0;
+	}
+	*/
+	*TIMER1_IFC = 0x1;				// Clear the interrupt flag
 }
 
 /*

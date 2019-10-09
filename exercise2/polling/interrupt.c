@@ -2,6 +2,10 @@
 #include <stdbool.h>
 #include "efm32gg.h"
 #include "interrupt.h"
+#include "gpio.h"
+#include "timer.h"
+
+extern int global_var;
 
 
 void nvic_init()			// Enable interrupts
@@ -12,29 +16,9 @@ void nvic_init()			// Enable interrupts
    * handling: - the peripheral must generate an interrupt signal - the
    * NVIC must be configured to make the CPU handle the signal You will
    * need TIMER1, GPIO odd and GPIO even interrupt handling for this
-   * assignment. 
+  / * assignment. 
    */
    
-   
-   
-   /*
- * if other interrupt handlers are needed, use the following names:
- * NMI_Handler HardFault_Handler MemManage_Handler BusFault_Handler
- * UsageFault_Handler Reserved7_Handler Reserved8_Handler
- * Reserved9_Handler Reserved10_Handler SVC_Handler DebugMon_Handler
- * Reserved13_Handler PendSV_Handler SysTick_Handler DMA_IRQHandler
- * GPIO_EVEN_IRQHandler TIMER0_IRQHandler USART0_RX_IRQHandler
- * USART0_TX_IRQHandler USB_IRQHandler ACMP0_IRQHandler ADC0_IRQHandler
- * DAC0_IRQHandler I2C0_IRQHandler I2C1_IRQHandler GPIO_ODD_IRQHandler
- * TIMER1_IRQHandler TIMER2_IRQHandler TIMER3_IRQHandler
- * USART1_RX_IRQHandler USART1_TX_IRQHandler LESENSE_IRQHandler
- * USART2_RX_IRQHandler USART2_TX_IRQHandler UART0_RX_IRQHandler
- * UART0_TX_IRQHandler UART1_RX_IRQHandler UART1_TX_IRQHandler
- * LEUART0_IRQHandler LEUART1_IRQHandler LETIMER0_IRQHandler
- * PCNT0_IRQHandler PCNT1_IRQHandler PCNT2_IRQHandler RTC_IRQHandler
- * BURTC_IRQHandler CMU_IRQHandler VCMP_IRQHandler LCD_IRQHandler
- * MSC_IRQHandler AES_IRQHandler EBI_IRQHandler EMU_IRQHandler 
- */
 }
 
 
@@ -43,13 +27,33 @@ void nvic_init()			// Enable interrupts
  */
 void __attribute__ ((interrupt)) TIMER1_IRQHandler ()
 {
-  /*
-   * TODO feed new samples to the DAC remember to clear the pending
-   * interrupt by writing 1 to TIMER1_IFC 
-   */
-  *DAC0_CH0DATA = 440;
-  *DAC0_CH1DATA = 440;
-  *TIMER1_IFC = 0x1;
+	static bool state = false;
+	if(state)
+	{	
+		gpio_leds_on();
+		state = false;
+	}
+	else
+	{
+		gpio_leds_off();
+		state = true;
+	}
+	
+	//static int count = 0;
+	//count++;
+	
+	/*
+	if(count == 13672)
+	{
+		global_var = 1;
+	}
+	if(count == 13672*2)
+	{
+		global_var = 0;
+		count = 0;
+	}
+	*/
+	*TIMER1_IFC = 0x1;				// Clear the interrupt flag
 }
 
 /*

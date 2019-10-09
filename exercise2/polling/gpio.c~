@@ -27,12 +27,12 @@ void gpio_init()
 
 void gpio_leds_on()
 {
-	*GPIO_PA_DOUT = LEDS_ON;
+	*GPIO_PA_DOUT = LEDS_ON;					// Turns leds on
 }
 
 void gpio_leds_off()
 {
-	*GPIO_PA_DOUT = LEDS_OFF;
+	*GPIO_PA_DOUT = LEDS_OFF;					// Turns leds off
 }
 
 void gpio_enable_clock()
