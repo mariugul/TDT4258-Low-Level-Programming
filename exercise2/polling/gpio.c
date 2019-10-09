@@ -20,12 +20,3 @@ void gpio_init()
   *GPIO_IFC = 0xFF;
   *GPIO_PA_DOUT = 0xFF00;
 }
-
-	/*
-	 * TODO set input and output pins for the joystick 
-	 */
-
-	/*
-	 * Example of HW access from C code: turn on joystick LEDs D4-D8 check 
-	 * efm32gg.h for o|ther useful register definitions 
-	 */
