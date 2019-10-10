@@ -7,7 +7,7 @@
 
 
 /** Initialize timer **/
-void timer_init(uint16_t period)
+void timer_init()
 {
   	timer_enable_clock();
   	timer_set_prescaler();

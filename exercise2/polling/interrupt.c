@@ -8,14 +8,6 @@
 
 void nvic_init()			// Enable interrupts
 {
-	/*
-   * TODO use the NVIC ISERx registers to enable handling of
-   * interrupt(s) remember two things are necessary for interrupt
-   * handling: - the peripheral must generate an interrupt signal - the
-   * NVIC must be configured to make the CPU handle the signal You will
-   * need TIMER1, GPIO odd and GPIO even interrupt handling for this
-  / * assignment. 
-   */
    
 }
 
@@ -26,6 +18,8 @@ void nvic_init()			// Enable interrupts
 void __attribute__ ((interrupt)) TIMER1_IRQHandler ()
 {
 	static bool state = false;
+
+    /*
 	if(state)
 	{	
 		gpio_leds_on();
@@ -36,9 +30,9 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler ()
 		gpio_leds_off();
 		state = true;
 	}
+	*/
 	
-
-	*TIMER1_IFC = 0x1;				// Clear the interrupt flag
+    *TIMER1_IFC = 0x1;				// Clear the interrupt flag
 }
 
 /*

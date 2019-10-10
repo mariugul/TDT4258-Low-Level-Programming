@@ -4,7 +4,7 @@
 int global_var;
 
 
-void timer_init(uint16_t period);
+void timer_init();
 void timer_enable_clock();
 void timer_set_prescaler();
 void timer_set_period();

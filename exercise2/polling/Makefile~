@@ -11,10 +11,10 @@ LDFLAGS=-mcpu=cortex-m3 -mthumb -g -lgcc -lc -lcs3 -lcs3unhosted -lefm32gg -Llib
 ASFLAGS=-mcpu=cortex-m3 -mthumb -g
 LINKERSCRIPT=lib/efm32gg.ld
 
-makefiles/main.bin : makefies/main.elf
+main.bin : main.elf
 	${OBJCOPY} -O binary $< $@
 
-makefiles/main.elf : makefiles/main.o makefiles/timer.o makefiles/dac.o makefiles/gpio.o makefiles/interrupt.o
+main.elf : main.o timer.o dac.o gpio.o interrupt.o low_energy.o
 	${LD} -T ${LINKERSCRIPT} $^ -o $@ ${LDFLAGS} 
 
 %.o : %.c
@@ -26,7 +26,7 @@ pretty :
 
 .PHONY : upload
 upload :
-	-eACommander.sh -r --address 0x00000000 -f "makefiles/main.bin" -r
+	-eACommander.sh -r --address 0x00000000 -f "main.bin" -r
 
 .PHONY : clean
 clean :
