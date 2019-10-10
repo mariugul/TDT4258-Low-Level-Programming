@@ -21,12 +21,12 @@ int main (void)
     //low_energy_init();
 
     // Prototype		
-    gpio_leds_off();
+    //gpio_leds_off();
 	
 	// Loop
 	while (true)
     {  
-        //gpio_map_to_led();
+        gpio_map_to_led();
         
         //sleep();
     }

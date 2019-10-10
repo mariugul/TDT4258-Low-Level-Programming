@@ -3,7 +3,9 @@
 #include "efm32gg.h"
 #include "timer.h"
 
-#define PRESCALER 0x8000000   //0xA000000
+//#define PRESCALER 0x8000000   //0xA000000
+#define PRESCALER 0xA000000   //0xA000000
+#define TIMER_TOP_VALUE 13672
 
 
 /** Initialize timer **/
@@ -14,7 +16,6 @@ void timer_init()
   	timer_set_period();
 	timer_enable_interrupt();
 	timer_start();
-	
 }		
 
 void timer_enable_clock()
@@ -31,7 +32,8 @@ void timer_set_prescaler()
 
 void timer_set_period()
 {
-	*TIMER1_TOP  = 0xFFFF;	// Write the top value
+	//*TIMER1_TOP  = 0xFFFF;	// Write the top value
+	*TIMER1_TOP  = TIMER_TOP_VALUE;	// Write the top value	
 }
 
 void timer_enable_interrupt()
