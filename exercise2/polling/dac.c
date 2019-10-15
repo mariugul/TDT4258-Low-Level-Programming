@@ -10,3 +10,4 @@ void dac_init()
   *DAC0_CH0CTRL    |= 0x01;
   *DAC0_CH1CTRL    |= 0x01;
 }
+// test test

@@ -59,7 +59,7 @@ void gpio_set_pins()
 /** Maps the button values directly to the led register */
 void gpio_map_to_led()
 {
-    *GPIO_PA_DOUT |= *GPIO_PC_DIN;   // Map button values to LED values
+    *GPIO_PA_DOUT = (*GPIO_PC_DIN << 8);   // Map button values to LED values
 }
 
 /* Maybe move this to interrupt.c? 
@@ -75,8 +75,17 @@ void gpio_enable_interrupt()
     *GPIO_IEN       = 0x00FF;		// Interrupt enable
     *GPIO_IFC       = 0xFF;			// Clear interrupt flag
 }
+/*
+void set_bit(uint32_t *register, uint8_t bit)
+{
+    *register |= (1 << bit);
+}
 
-
+void clear_bit(uint32_t *register, uint8_t bit)
+{
+    *register &= ~(1 << bit)
+}
+*/
 
 
 

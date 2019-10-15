@@ -11,10 +11,13 @@ LDFLAGS=-mcpu=cortex-m3 -mthumb -g -lgcc -lc -lcs3 -lcs3unhosted -lefm32gg -Llib
 ASFLAGS=-mcpu=cortex-m3 -mthumb -g
 LINKERSCRIPT=lib/efm32gg.ld
 
+OBJS   = main.o timer.o dac.o gpio.o interrupt.o low_energy.o
+
+
 main.bin : main.elf
 	${OBJCOPY} -O binary $< $@
 
-main.elf : main.o timer.o dac.o gpio.o interrupt.o low_energy.o
+main.elf : $(OBJS)
 	${LD} -T ${LINKERSCRIPT} $^ -o $@ ${LDFLAGS} 
 
 %.o : %.c

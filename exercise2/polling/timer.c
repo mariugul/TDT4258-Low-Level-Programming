@@ -3,9 +3,9 @@
 #include "efm32gg.h"
 #include "timer.h"
 
-//#define PRESCALER 0x8000000   //0xA000000
-#define PRESCALER 0xA000000   //0xA000000
-#define TIMER_TOP_VALUE 13672
+//#define PRESCALER 
+#define PRESCALER 0xA000000     // Prescaler for the timer (1024)
+#define TIMER_TOP_VALUE 13672   // One second interrupts
 
 
 /** Initialize timer **/
