@@ -8,7 +8,7 @@ OBJCOPY=arm-none-eabi-objcopy
 CFLAGS=-mcpu=cortex-m3  -mthumb -g -std=c99 -Wall
 LDFLAGS=-mcpu=cortex-m3 -mthumb -g -lgcc -lc -lcs3 -lcs3unhosted -lefm32gg -Llib
 ASFLAGS=-mcpu=cortex-m3 -mthumb -g
-LINKERSCRIPT=lib/efm32gg.ld
+LINKERSCRIPT=lib/linkerscript.ld
 
 # All the object files
 OBJS   = build/main.o build/timer.o build/dac.o build/gpio.o build/interrupt.o build/low_energy.o
@@ -22,11 +22,8 @@ build/main.elf : $(OBJS)
 	${LD} -T ${LINKERSCRIPT} $^ -o $@ ${LDFLAGS} 
 
 # Compile the .c files into .o files if modified
-build/%.o : src/%.c
+build/%.o : src/%.c 
 	${CC} ${CFLAGS} -c $< -o $@
-
-build/%.o : src/%.s
-	${AS} ${ASFLAGS} $< -o $@
 
 
 # Command for formatter
