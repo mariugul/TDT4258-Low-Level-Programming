@@ -1,33 +1,45 @@
-# Example Makefile
-#
-# Exercise 2, TDT4258
+# Makefile for Exercise 2, TDT4258
+# Modified by Marius C. K.
 
 CC=arm-none-eabi-gcc
 LD=arm-none-eabi-gcc
 OBJCOPY=arm-none-eabi-objcopy
 
-CFLAGS=-mcpu=cortex-m3 -mthumb -g -std=c99 -Wall
+CFLAGS=-mcpu=cortex-m3  -mthumb -g -std=c99 -Wall
 LDFLAGS=-mcpu=cortex-m3 -mthumb -g -lgcc -lc -lcs3 -lcs3unhosted -lefm32gg -Llib
 ASFLAGS=-mcpu=cortex-m3 -mthumb -g
 LINKERSCRIPT=lib/efm32gg.ld
 
-polling.bin : polling.elf
+# All the object files
+OBJS   = build/main.o build/timer.o build/dac.o build/gpio.o build/interrupt.o build/low_energy.o
+
+# Build main binary
+build/main.bin : build/main.elf
 	${OBJCOPY} -O binary $< $@
 
-polling.elf : polling.o timer.o dac.o gpio.o interrupt.o
+# Build main elf 
+build/main.elf : $(OBJS)
 	${LD} -T ${LINKERSCRIPT} $^ -o $@ ${LDFLAGS} 
 
-%.o : %.c
+# Compile the .c files into .o files if modified
+build/%.o : src/%.c
 	${CC} ${CFLAGS} -c $< -o $@
 
+build/%.o : src/%.s
+	${AS} ${ASFLAGS} $< -o $@
+
+
+# Command for formatter
 .PHONY : pretty
 pretty :
 	-indent *.c *.h
 
+# Command for uploading code
 .PHONY : upload
 upload :
-	-eACommander.sh -r --address 0x00000000 -f "polling.bin" -r
+	-eACommander.sh -r --address 0x00000000 -f "build/main.bin" -r
 
+# Command for cleaning all the build files
 .PHONY : clean
 clean :
-	-rm -rf *.o *.elf *.bin *.hex 
+	-rm -rf build/*.o build/*.elf build/*.bin build/*.hex 
