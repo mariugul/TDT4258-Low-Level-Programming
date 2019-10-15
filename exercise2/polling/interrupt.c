@@ -1,58 +1,69 @@
-#include <stdint.h>
-#include <stdbool.h>
-#include "efm32gg.h"
 #include "interrupt.h"
+#include "dac.h"
+#include "efm32gg.h"
 #include "gpio.h"
 #include "timer.h"
+#include "tones.h"
+#include <stdbool.h>
+#include <stdint.h>
+//#include "melodies.h"
 
+// PUT THESE DEFINES IN SEPERATE FILE
+#define MAX_VOL 0xF
+#define STD_VOL 0x9
+#define LOW_VOL 0x4
 
-void nvic_init()			// Enable interrupts
+void nvic_init() // Enable interrupts
 {
-   
+    //*ISER0 |= 0x1802;
 }
-
 
 /*
  * TIMER1 interrupt handler 
  */
-void __attribute__ ((interrupt)) TIMER1_IRQHandler ()
+void __attribute__((interrupt)) TIMER1_IRQHandler()
 {
-	static bool state = false;
+    //gpio_leds_toggle();
 
-    /*
-	if(state)
-	{	
-		gpio_leds_on();
-		state = false;
-	}
-	else
-	{
-		gpio_leds_off();
-		state = true;
-	}
-	*/
-	
-    *TIMER1_IFC = 0x1;				// Clear the interrupt flag
+    static int count = 0;
+    static int i = 0;
+    static int iterations = 0;
+
+    if (iterations == time[i]) {
+        i++;
+        iterations = 0;
+    }
+
+    if (count >= tone[i]) {
+        count = 0;
+        if (tone[i] == 0)
+            timer_stop();
+        else
+            dac_square_wave(LOW_VOL);
+    }
+
+    count++;
+    iterations++;
+    interrupt_clear();
 }
 
 /*
  * GPIO even pin interrupt handler 
  */
-void __attribute__ ((interrupt)) GPIO_EVEN_IRQHandler ()
+void __attribute__((interrupt)) GPIO_EVEN_IRQHandler()
 {
-  /*
-   * TODO handle button pressed event, remember to clear pending
-   * interrupt 
-   */
+    gpio_map_to_led();
 }
 
 /*
  * GPIO odd pin interrupt handler 
  */
-void __attribute__ ((interrupt)) GPIO_ODD_IRQHandler ()
+void __attribute__((interrupt)) GPIO_ODD_IRQHandler()
 {
-  /*
-   * TODO handle button pressed event, remember to clear pending
-   * interrupt 
-   */
+    gpio_map_to_led();
+}
+
+void interrupt_clear()
+{
+    *TIMER1_IFC = 0x1; // Clear the interrupt flag
 }

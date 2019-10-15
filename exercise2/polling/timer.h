@@ -10,5 +10,6 @@ void timer_set_prescaler();
 void timer_set_period();
 void timer_enable_interrupt();
 void timer_start();
+void timer_stop();
 
 #endif

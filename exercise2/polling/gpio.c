@@ -36,6 +36,11 @@ void gpio_leds_off()
 	*GPIO_PA_DOUT = LEDS_OFF;					// Turns leds off
 }
 
+void gpio_leds_toggle()
+{ 
+    *GPIO_PA_DOUT ^= (LEDS_ON << 8);
+}
+
 /** Enable the GPIO clock */
 void gpio_enable_clock()
 {
@@ -71,7 +76,7 @@ void gpio_enable_interrupt()
 {
 	*GPIO_EXTIPSELL = 0x22222222;
   	*GPIO_EXTIFALL  = 0xFF;  		// Interrupt on falling edge 
-    //*GPIO_EXTIRISE = 0xFF; 		// Interrupt on rising edge 
+    *GPIO_EXTIRISE  = 0xFF; 		// Interrupt on rising edge 
     *GPIO_IEN       = 0x00FF;		// Interrupt enable
     *GPIO_IFC       = 0xFF;			// Clear interrupt flag
 }
