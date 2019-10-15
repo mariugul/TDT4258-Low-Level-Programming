@@ -63,11 +63,12 @@
 
 #define TIMER1_BASE 0x40010400
 
-#define TIMER1_CMD ((volatile uint32_t*)(TIMER1_BASE + 0x04))
-#define TIMER1_IEN ((volatile uint32_t*)(TIMER1_BASE + 0x0c))
-#define TIMER1_IFC ((volatile uint32_t*)(TIMER1_BASE + 0x18))
-#define TIMER1_TOP ((volatile uint32_t*)(TIMER1_BASE + 0x1c))
-#define TIMER1_CNT ((volatile uint32_t*)(TIMER1_BASE + 0x24))
+#define TIMER1_CTRL ((volatile uint32_t*)(TIMER1_BASE))
+#define TIMER1_CMD  ((volatile uint32_t*)(TIMER1_BASE + 0x04))
+#define TIMER1_IEN  ((volatile uint32_t*)(TIMER1_BASE + 0x0c))
+#define TIMER1_IFC  ((volatile uint32_t*)(TIMER1_BASE + 0x18))
+#define TIMER1_TOP  ((volatile uint32_t*)(TIMER1_BASE + 0x1c))
+#define TIMER1_CNT  ((volatile uint32_t*)(TIMER1_BASE + 0x24))
 
 // NVIC
 
@@ -95,7 +96,8 @@
 
 #define EMU_BASE2 0x400c6000
 
-#define EMU_CTRL ((volatile uint32_t*)(EMU_BASE2 + 0x000))
+#define EMU_CTRL    ((volatile uint32_t*)(EMU_BASE2 + 0x000))
+#define EMU_MEMCTRL ((volatile uint32_t*)(EMU_BASE2 + 0x004)) 
 
 // DAC0
 
