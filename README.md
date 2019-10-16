@@ -3,13 +3,13 @@ This is the term project for TDT4258 - Low-Level Programming at NTNU Trondheim, 
 
 ![EFM32GG](images/efm32gg.png) 
 
-## 1. ARM Assembler
+## Part 1. ARM Assembler
 The first part of the project was programming of buttons, LEDs, interrupts and low energy settings in assembler language. 
 
-## 2. Embedded C 
+## Part 2. Embedded C 
 The second part was bare metal C programming on the same board with more extensive functionality.
 
-## 3. uClinux
+## Part 3. uClinux
 The third part was programming with an operatingsystem uClinux and implementing the game.
 
 ## Folder structure
