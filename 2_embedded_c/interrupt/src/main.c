@@ -4,6 +4,7 @@
 #include "../inc/interrupt.h"
 #include "../inc/low_energy.h"
 #include "../inc/timer.h"
+#include "../inc/melodies.h"
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -17,6 +18,8 @@ int main(void)
     //low_energy_init();
 
     // PLAY START UP MELODY
+    melodies_select();
+    //meldodies_select(song2);
 
     // Loop
     while (true) {

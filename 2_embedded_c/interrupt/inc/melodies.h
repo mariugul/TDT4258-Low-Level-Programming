@@ -3,28 +3,23 @@
 
 #include "tones.h"
 
-
-/* Start melody */
-int start_melody[] = {TONE_G5, TONE_D5, TONE_A4, TONE_G5, TONE_D5, TONE_A4, 0};
+extern int *song_ptr; // Pointing to the selected song
 
 
-/* Scoring melody */
+void melodies_select(); // Select what melody to play
+int  melodies_bpm(int bpm); //Calculate the duration of ONE beat
+
+
+
+/********** MELODIES ***********/
+
+/* Scoring melody */    
+int const b = 44164*60/120; // Choose the BPM of the song
 int melodies_score[3][2] = {
-    {TONE_C5, 44164/10},
-    {TONE_G5, 44164/5},
+    {TONE_C5, 1*b},
+    {TONE_G5, 2*b},
     {0,0}
 };       
 
-
-// Keep track of current song with global buffer
-//int song_buff[3][2] = {};
-//song_buff = &melodies_score[0][0];
-
-
-// START_MELODY
-// SCORE
-// HIT
-// GAME OVER
-// 
 
 #endif
