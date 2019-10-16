@@ -16,12 +16,11 @@ int main(void)
     timer_init();
     //low_energy_init();
 
-    // Prototype
+    // PLAY START UP MELODY
 
     // Loop
     while (true) {
-        gpio_leds_toggle();
-        gpio_leds_off();
+        sleep();       
     }
 
     return 0;

@@ -13,6 +13,9 @@
 #define STD_VOL 0x9
 #define LOW_VOL 0x4
 
+int song_buff[100][2];
+int *ptr = &song_buff[100][2];
+
 void nvic_init() // Enable interrupts
 {
     //*ISER0 |= 0x1802;
@@ -24,8 +27,8 @@ void nvic_init() // Enable interrupts
 void __attribute__((interrupt)) TIMER1_IRQHandler()
 {
     // pointer to buffer
-    /*
-    int *ptr = &song_buff[0][0];
+    
+    
 
     static int tone_selection = 0;
     static int count = 0;
@@ -48,7 +51,7 @@ void __attribute__((interrupt)) TIMER1_IRQHandler()
     count++;
     iterations++;
     interrupt_clear();
-    */
+    
 }
 
 /*
