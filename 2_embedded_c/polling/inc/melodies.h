@@ -9,13 +9,6 @@ int start_melody_time[] = {44164, 44164, 44164, 44164, 44164, 44164};
 int score[4][4] = {TONE_C5,  TONE_G5}
                  {2, 4, 8, 2, 1, 4, 8};
 
-BPM 120
-BAR 1, 2, 4, 8, 16
 
-// START_MELODY
-// SCORE
-// HIT
-// GAME OVER
-// 
 
 #endif

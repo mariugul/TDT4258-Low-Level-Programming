@@ -7,8 +7,10 @@
 extern int *song_ptr; // Pointing to the selected song
 
 // Songs
-extern int score_sound[3][2];
-extern int hit_sound[3][2];
+extern int score_sound[][2];
+extern int hit_sound[][2];
+extern int end_game_sound[][2];
+extern int start_up_melody[][2];
 
 // Functions
 void melodies_init();            // Play star tup melody

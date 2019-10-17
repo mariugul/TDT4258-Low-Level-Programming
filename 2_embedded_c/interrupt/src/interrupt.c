@@ -2,7 +2,7 @@
 #include "../inc/dac.h"
 #include "../inc/efm32gg.h"
 #include "../inc/gpio.h"
-#include "../inc/melodies.h" // To play the melodies in the interrupt handler
+#include "../inc/melodies.h" 
 #include "../inc/timer.h"
 #include "../inc/tones.h"
 #include <stdbool.h>
@@ -61,9 +61,9 @@ void __attribute__((interrupt)) TIMER1_IRQHandler()
         count = 0;
 
         // TEST
-        if (*(song_ptr + tone_length) != 0)
+        if (*(song_ptr + tone_length) != -1)
         {
-            dac_square_wave(LOW_VOL);
+            dac_square_wave(STD_VOL);
             //gpio_leds_off();
         }
         else {
@@ -140,25 +140,19 @@ void __attribute__((interrupt)) LETIMER0_IRQHandler()
  */
 void gpio_handler()
 {
-    //gpio_leds_toggle();
-
-    //*PC_DIN      MASK
-    //00000001 & 00000001
+    gpio_map_to_led();
 
     // Button 1
     if ((*GPIO_PC_DIN & BUTTON1) == 0) 
-    {
-        gpio_leds_toggle();
         melodies_play(score_sound);
-    }
 
     // Button 2
     else if ((*GPIO_PC_DIN & BUTTON2) == 0)
-        melodies_play(score_sound);
+        melodies_play(end_game_sound);
 
     // Button 3
     else if ((*GPIO_PC_DIN & BUTTON3) == 0)
-        melodies_play(score_sound);
+        melodies_play(hit_sound);
 
     // Button 4
     else if ((*GPIO_PC_DIN & BUTTON4) == 0)
@@ -178,7 +172,7 @@ void gpio_handler()
 
     // Button 8
     else if ((*GPIO_PC_DIN & BUTTON8) == 0)
-        melodies_play(score_sound);
+        melodies_play(start_up_melody);
 
     GIF_clear(); // Clear interrupt flag
 }
