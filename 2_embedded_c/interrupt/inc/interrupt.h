@@ -1,7 +1,10 @@
 #ifndef __INTERRUPT_H__
 #define __INTERRUPT_H__
 
+#include <stdbool.h>
+
 extern int song_buff[100][2];
+extern bool song_finish;
 
 void nvic_init(); // Enable interrupts
 

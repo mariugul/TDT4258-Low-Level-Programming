@@ -14,9 +14,5 @@ extern int hit_sound[3][2];
 void melodies_init();            // Play star tup melody
 void melodies_select(int *song); // Select what melody to play
 int melodies_bpm(int bpm);       //Calculate the duration of ONE beat
-int *melodies_song_ptr();        // Return the song pointer
-
-// Song pointers
-extern int *pointers[2];
 
 #endif

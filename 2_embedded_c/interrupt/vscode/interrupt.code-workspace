@@ -6,7 +6,10 @@
     ],
     "settings": {
         "files.associations": {
-            "efm32gg.h": "c"
+            "efm32gg.h": "c",
+            "dac.h": "c",
+            "timer.h": "c",
+            "gpio.h": "c"
         }
     }
 }

@@ -23,6 +23,9 @@
 #define BUTTON7 0xBF
 #define BUTTON8 0x7F
 
+// variables for timer interrupt handler
+bool song_finish = false;
+
 void nvic_init() // Enable interrupts
 {
     //*ISER0 |= 0x1802;
@@ -56,35 +59,58 @@ void __attribute__((interrupt)) TIMER1_IRQHandler()
     static int tone_length = 1;
     static int count = 0;
     static int iterations = 0;
-    
+
+    /*
+    if(song_finish)
+        gpio_leds_off();
+    else 
+        gpio_leds_on();
+    */
+
     // Increment
-    count++;
-    iterations++;
+        count++;
+        iterations++;
+    
 
     // Sets the length of the tones
-    if (iterations >= (*(song_ptr + tone_length))) {
+    if (iterations >= (*(song_ptr + tone_length)) && !song_finish) { // > 44 000
         tone_length += 2;
         tone_selection += 2;
         iterations = 0;
     }
 
     // Sets the tones
-    if (count >= (*(song_ptr + tone_selection))) {
+    if (count >= (*(song_ptr + tone_selection))) { // > 33
         count = 0;
 
-        if ((*(song_ptr + tone_selection)) == 0){ // When the end of array is reached
+        // TEST
+        if (song_ptr + tone_length != 0)
+        {
+            dac_square_wave(LOW_VOL);
+            //gpio_leds_on();
+        }
+        else {
+            // Reset poiting location
+            tone_selection = 0;
+            tone_length = 0;
+            count = 0;
+            iterations = 0;
+            song_finish = true;
+            gpio_leds_on();
+        }
+        // --------------------
+        /*
+        if ((*(song_ptr + tone_selection)) == 0) { // When the end of array is reached
             timer_stop(); // Song finished
             tone_length = 0;
             tone_selection = 0;
-            gpio_leds_off();
-        }
-        else{
+            //gpio_leds_off();
+        } else {
             dac_square_wave(LOW_VOL); // Produce square wave
-            gpio_leds_on();
+            //gpio_leds_on();
         }
+        */
     }
-
-    
 
     TIF_clear(); // Clear timer interrupt flag
 }
@@ -110,7 +136,7 @@ void __attribute__((interrupt)) GPIO_ODD_IRQHandler()
  */
 void __attribute__((interrupt)) LETIMER0_IRQHandler()
 {
-     // Counter variables
+    // Counter variables
     static int tone_selection = 0;
     static int tone_length = 1;
     static int count = 0;
@@ -141,10 +167,9 @@ void __attribute__((interrupt)) LETIMER0_IRQHandler()
 
     count++;
     iterations++;
-    
+
     LEIF_clear();
 }
-
 
 /* 
  * Handles the GPIO interrupt calls
@@ -164,11 +189,11 @@ void gpio_handler()
     // Button 3
     else if (*GPIO_PC_DIN == BUTTON3)
         melodies_play(score_sound);
-    
+
     // Button 4
     else if (*GPIO_PC_DIN == BUTTON4)
         melodies_play(score_sound);
-    
+
     // Button 5
     else if (*GPIO_PC_DIN == BUTTON5)
         melodies_play(score_sound);
@@ -185,7 +210,7 @@ void gpio_handler()
     else if (*GPIO_PC_DIN == BUTTON8)
         melodies_play(score_sound);
 
-    else 
+    else
         timer_stop();
 
     GIF_clear(); // Clear interrupt flag
@@ -212,5 +237,5 @@ void GIF_clear()
  */
 void LEIF_clear()
 {
-    *LETIMER0_IFC  = 1;
+    *LETIMER0_IFC = 1;
 }
