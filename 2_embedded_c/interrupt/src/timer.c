@@ -15,6 +15,7 @@ void timer_init()
     timer_set_period();
     timer_enable_interrupt();
     timer_start();
+    //timer_le_init(); // Set up low energy timer
 }
 
 void timer_enable_clock()
@@ -30,7 +31,6 @@ void timer_set_prescaler()
 
 void timer_set_period()
 {
-    //*TIMER1_TOP  = 0xFFFF;	// Write the top value
     *TIMER1_TOP = TIMER_TOP_VALUE; // Write the top value
 }
 
@@ -42,14 +42,31 @@ void timer_enable_interrupt()
 
 void timer_start()
 {
-    *TIMER1_CMD = 0x01; // Start the timer
+    *TIMER1_CMD = 0x1; // Start the timer
 }
 
 void timer_stop()
 {
-    *TIMER1_CMD = 0x00; // Stop the timer
+    *TIMER1_CMD = 0x2; // Stop the timer
 }
 
-int timer_frequency(int freq)
+void timer_le_start()
 {
+    *CMU_LFCLKSEL = 1; // Start the low energy timer
+}
+
+void timer_le_stop()
+{
+    *CMU_LFCLKSEL = 0; // Stop the low energy timer
+}
+
+void timer_le_init()
+{
+	*CMU_HFCORECLKEN0 |= 1 << 4; // Enable clock
+	*CMU_OSCENCMD |= 1 << 6; // Enable oscilator
+	*CMU_LFACLKEN0 |= CMU_LETIMER0_EN; // Enable timer
+	*LETIMER0_CTRL |= 1 << 9; // Free mode
+	*LETIMER0_TOP = TIMER_TOP_VALUE; // Write the top value
+	*LETIMER0_IEN = 1; // Enable timer interrupt
+	*LETIMER0_CMD = 1; // Start timer
 }

@@ -4,5 +4,9 @@
 			"path": "C:\\Users\\Mariu\\Dropbox\\NTNU\\Høst 2019\\Low level programming\\Low-Level-Programming\\2_embedded_c\\interrupt"
 		}
     ],
-    "settings": {}
+    "settings": {
+        "files.associations": {
+            "efm32gg.h": "c"
+        }
+    }
 }

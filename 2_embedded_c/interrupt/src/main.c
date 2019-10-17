@@ -13,17 +13,15 @@ int main(void)
     // Initialize
     gpio_init();
     dac_init();
-    //nvic_init();
     timer_init();
     //low_energy_init();
+    melodies_init();
 
-    // PLAY START UP MELODY
-    melodies_select();
-    //meldodies_select(song2);
+   
 
     // Loop
     while (true) {
-        sleep();       
+
     }
 
     return 0;

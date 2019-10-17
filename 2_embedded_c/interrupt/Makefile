@@ -22,7 +22,7 @@ build/main.elf : $(OBJS)
 	${LD} -T ${LINKERSCRIPT} $^ -o $@ ${LDFLAGS} 
 
 # Compile the .c files into .o files if modified
-build/%.o : src/%.c 
+build/%.o : src/%.c
 	${CC} ${CFLAGS} -c $< -o $@
 
 
