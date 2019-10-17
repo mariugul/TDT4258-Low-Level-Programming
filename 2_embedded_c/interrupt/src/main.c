@@ -17,11 +17,9 @@ int main(void)
     //low_energy_init();
     melodies_init();
 
-   
-
     // Loop
     while (true) {
-
+        //sleep();
     }
 
     return 0;

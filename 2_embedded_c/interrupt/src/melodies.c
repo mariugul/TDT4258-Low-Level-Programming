@@ -2,6 +2,7 @@
 #include "../inc/efm32gg.h"
 #include "../inc/interrupt.h"
 #include "../inc/timer.h"
+#include "../inc/gpio.h"
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -11,8 +12,7 @@
 void melodies_init()
 {
     // Play start up melody
-    melodies_play(hit_sound);
-    //melodies_play(score_sound);
+    melodies_play(score_sound);
 }
 
 /** Select what melody to play */
@@ -20,7 +20,6 @@ void melodies_play(int* song)
 {
     song_ptr = song; // Point to the selected song
     song_finish = false;
-    //timer_start(); // Start the song
 }
 
 /** Calculate the duration of ONE beat */

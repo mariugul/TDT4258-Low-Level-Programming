@@ -80,18 +80,6 @@ void gpio_enable_interrupt()
     *GPIO_IEN       = 0x00FF;		// Interrupt enable
     *GPIO_IFC       = 0xFF;			// Clear interrupt flag
 }
-/*
-void set_bit(uint32_t *register, uint8_t bit)
-{
-    *register |= (1 << bit);
-}
-
-void clear_bit(uint32_t *register, uint8_t bit)
-{
-    *register &= ~(1 << bit)
-}
-*/
-
 
 
 
