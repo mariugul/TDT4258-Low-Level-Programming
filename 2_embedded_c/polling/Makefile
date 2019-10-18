@@ -11,7 +11,7 @@ ASFLAGS=-mcpu=cortex-m3 -mthumb -g
 LINKERSCRIPT=lib/linkerscript.ld
 
 # All the object files
-OBJS   = build/main.o build/timer.o build/dac.o build/gpio.o build/interrupt.o build/low_energy.o
+OBJS   = build/main.o build/timer.o build/dac.o build/gpio.o build/interrupt.o build/low_energy.o build/tones.o
 
 # Build main binary
 build/main.bin : build/main.elf

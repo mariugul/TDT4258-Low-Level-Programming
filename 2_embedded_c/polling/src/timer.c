@@ -50,7 +50,3 @@ void timer_stop()
     *TIMER1_CMD = 0x00; // Stop the timer
 }
 
-int timer_frequency(int freq)
-{
-
-}

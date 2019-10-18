@@ -7,21 +7,32 @@
 #include "../inc/tones.h"
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 
-int current_sound[20];
-int current_time[20];
+int current_sound[30];
+int current_time[30];
 
 void vector_copy(int n)
 {
     if (n == 0) {
-        for (int i = 0; i < sizeof(point_scored_sound); i++) {
+        for (int i = 0; i < point_scored_sound_size; i++) {
             current_sound[i] = point_scored_sound[i];
             current_time[i] = point_scored_time[i];
         }
     } else if (n == 1) {
-        for (int i = 0; i < sizeof(end_game_sound); i++) {
+        for (int i = 0; i < end_game_sound_size; i++) {
             current_sound[i] = end_game_sound[i];
             current_time[i] = end_game_time[i];
+        }
+    }else if (n == 2) {
+        for (int i = 0; i < end_game2_sound_size; i++) {
+            current_sound[i] = end_game2_sound[i];
+            current_time[i] = end_game2_time[i];
+        }
+    }else if (n == 3) {
+        for (int i = 0; i < track1_sound_size; i++) {
+            current_sound[i] = track1_sound[i];
+            current_time[i] = track1_time[i];
         }
     }
 }
@@ -33,6 +44,12 @@ bool track_buttons()
         return true;
     } else if ((*GPIO_PC_DIN & BUTTON2) == 0) {
         vector_copy(1);
+        return true;
+    }else if ((*GPIO_PC_DIN & BUTTON3) == 0) {
+        vector_copy(2);
+        return true;
+    }else if ((*GPIO_PC_DIN & BUTTON4) == 0) {
+        vector_copy(3);
         return true;
     }
     return false;

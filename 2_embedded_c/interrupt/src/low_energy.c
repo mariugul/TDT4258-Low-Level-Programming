@@ -22,5 +22,6 @@ void sleep()
 /** Set in low energy mode*/
 void low_energy_mode()
 {
-    *SCR |= 0x06; // Set in low energy mode 2
+    //*SCR |= 0x06; // Set in low energy mode 2
+    *SCR = 0x0; // Set in low energy mode 1
 }
