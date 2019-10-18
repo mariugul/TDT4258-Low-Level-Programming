@@ -1,1 +1,4 @@
+# Ignore build files
 .o
+.elf
+.bin
