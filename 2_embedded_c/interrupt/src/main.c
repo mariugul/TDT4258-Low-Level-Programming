@@ -14,8 +14,9 @@ int main(void)
     gpio_init();
     dac_init();
     timer_init();
-    //low_energy_init();
+    interrupt_init();
     melodies_init();
+    //low_energy_init();
 
     // Loop
     while (true) {

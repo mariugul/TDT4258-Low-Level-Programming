@@ -8,18 +8,18 @@
 
 
 // Global variable
-*song_ptr; // Pointing to the selected song
+int *song_ptr = (int *)no_sound; // Pointing to the selected song
 
 void melodies_init()
 {
     // Play start up melody
-    //melodies_play(start_up_melody);
+    //melodies_play((int *)start_up_melody);
 }
 
 /** Select what melody to play */
-void melodies_play(int* song)
+void melodies_play(int *song)
 {
-    song_ptr = song; // Point to the selected song
+    song_ptr = (int *)song; // Point to the selected song
     song_finish = false;
 }
 
@@ -35,6 +35,10 @@ int melodies_bpm(int bpm)
 }
 
 /** Songs */
+int no_sound[][2] = {
+    {-1, -1}
+};
+
 int score_sound[][2] = {
     {C5, FOURTH},
     {G5, HALF},

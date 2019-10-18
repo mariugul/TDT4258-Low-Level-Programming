@@ -1,5 +1,5 @@
-#ifndef __TIMER_H__		// HEADER GUARD
-#define __TIMER_H__
+#ifndef __DAC_H__		// HEADER GUARD
+#define __DAC_H__
 
 #include <stdint.h>
 

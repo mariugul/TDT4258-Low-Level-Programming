@@ -17,8 +17,6 @@
 #define SIX    ONESEC*6
 #define EIGHT  ONESEC*8
 
-
-
 // Tones - The "S" means sharp "#". Ex: CS4 represents "C#4"
 #define PRESC 44164/2 // The prescaled divider used (14MHz/13672 = 1024)
                       // Divided by 2 because the frequency making function is toggling only half the time.
