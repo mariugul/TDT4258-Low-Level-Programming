@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 
-
 #define PRESC 44164 // The prescaled divider used (14MHz/13672 = 1024)
 
 // Tones - The "S" means sharp "#". Ex: A4S represents "A4#"

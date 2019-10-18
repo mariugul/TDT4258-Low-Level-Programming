@@ -2,7 +2,7 @@
 #include "../inc/dac.h"
 #include "../inc/efm32gg.h"
 #include "../inc/gpio.h"
-#include "../inc/melodies.h" 
+#include "../inc/melodies.h"
 #include "../inc/timer.h"
 #include "../inc/tones.h"
 #include <stdbool.h>
@@ -14,14 +14,14 @@
 #define LOW_VOL 0x4
 
 // Button states
-#define BUTTON1 (1<<0)
-#define BUTTON2 (1<<1)
-#define BUTTON3 (1<<2)
-#define BUTTON4 (1<<3)
-#define BUTTON5 (1<<4)
-#define BUTTON6 (1<<5)
-#define BUTTON7 (1<<6)
-#define BUTTON8 (1<<7)
+#define BUTTON1 (1 << 0)
+#define BUTTON2 (1 << 1)
+#define BUTTON3 (1 << 2)
+#define BUTTON4 (1 << 3)
+#define BUTTON5 (1 << 4)
+#define BUTTON6 (1 << 5)
+#define BUTTON7 (1 << 6)
+#define BUTTON8 (1 << 7)
 
 // variables for timer interrupt handler
 bool song_finish = false;
@@ -43,30 +43,26 @@ void __attribute__((interrupt)) TIMER1_IRQHandler()
     static int iterations = 0;
 
     // Increment
-    if(!song_finish)
-    {
+    if (!song_finish) {
         count++;
         iterations++;
     }
 
     // Sets the length of the tones
-    if (iterations >= (*(song_ptr + tone_length)) && !song_finish) { // > 44 000
+    if (iterations >= (*(song_ptr + tone_length)) && !song_finish) {
         tone_length += 2;
         tone_selection += 2;
         iterations = 0;
     }
 
     // Sets the tones
-    if (count >= (*(song_ptr + tone_selection)) && !song_finish) { // > 33
+    if (count >= (*(song_ptr + tone_selection)) && !song_finish) {
         count = 0;
 
-        // TEST
-        if (*(song_ptr + tone_length) != -1)
-        {
+        // Generate soundwave
+        if (*(song_ptr + tone_length) != -1) {
             dac_square_wave(STD_VOL);
-            //gpio_leds_off();
-        }
-        else {
+        } else {
             // Reset pointing location
             tone_selection = 0;
             tone_length = 1;
@@ -113,36 +109,36 @@ void gpio_handler()
     gpio_map_to_led();
 
     // Button 1
-    if ((*GPIO_PC_DIN & BUTTON1) == 0) 
-        melodies_play((int *) score_sound);
+    if ((*GPIO_PC_DIN & BUTTON1) == 0)
+        melodies_play((int*)score_sound);
 
     // Button 2
     else if ((*GPIO_PC_DIN & BUTTON2) == 0)
-        melodies_play((int *)end_game_sound);
+        melodies_play((int*)end_game_sound);
 
     // Button 3
     else if ((*GPIO_PC_DIN & BUTTON3) == 0)
-        melodies_play((int *)hit_sound);
+        melodies_play((int*)hit_sound);
 
     // Button 4
     else if ((*GPIO_PC_DIN & BUTTON4) == 0)
-        melodies_play((int *)score_sound);
+        melodies_play((int*)score_sound);
 
     // Button 5
     else if ((*GPIO_PC_DIN & BUTTON5) == 0)
-        melodies_play((int *)score_sound);
+        melodies_play((int*)score_sound);
 
     // Button 6
     else if ((*GPIO_PC_DIN & BUTTON6) == 0)
-        melodies_play((int *)score_sound);
+        melodies_play((int*)score_sound);
 
     // Button 7
     else if ((*GPIO_PC_DIN & BUTTON7) == 0)
-        melodies_play((int *)score_sound);
+        melodies_play((int*)score_sound);
 
     // Button 8
     else if ((*GPIO_PC_DIN & BUTTON8) == 0)
-        melodies_play((int *)start_up_melody);
+        melodies_play((int*)start_up_melody);
 
     GIF_clear(); // Clear interrupt flag
 }

@@ -3,10 +3,11 @@
 #include "../inc/gpio.h"
 #include "../inc/interrupt.h"
 #include "../inc/low_energy.h"
-#include "../inc/timer.h"
 #include "../inc/melodies.h"
+#include "../inc/timer.h"
 #include <stdbool.h>
 #include <stdint.h>
+
 
 int main(void)
 {
@@ -16,11 +17,11 @@ int main(void)
     timer_init();
     interrupt_init();
     melodies_init();
-    //low_energy_init();
+    low_energy_init();
 
     // Loop
     while (true) {
-        //sleep();
+        sleep();
     }
 
     return 0;

@@ -1,8 +1,6 @@
 #include "../inc/dac.h"
 #include "../inc/efm32gg.h"
 #include "../inc/gpio.h"
-#include "../inc/interrupt.h"
-#include "../inc/low_energy.h"
 #include "../inc/timer.h"
 #include "../inc/tones.h"
 #include <stdbool.h>
@@ -24,12 +22,12 @@ void vector_copy(int n)
             current_sound[i] = end_game_sound[i];
             current_time[i] = end_game_time[i];
         }
-    }else if (n == 2) {
+    } else if (n == 2) {
         for (int i = 0; i < end_game2_sound_size; i++) {
             current_sound[i] = end_game2_sound[i];
             current_time[i] = end_game2_time[i];
         }
-    }else if (n == 3) {
+    } else if (n == 3) {
         for (int i = 0; i < track1_sound_size; i++) {
             current_sound[i] = track1_sound[i];
             current_time[i] = track1_time[i];
@@ -45,10 +43,10 @@ bool track_buttons()
     } else if ((*GPIO_PC_DIN & BUTTON2) == 0) {
         vector_copy(1);
         return true;
-    }else if ((*GPIO_PC_DIN & BUTTON3) == 0) {
+    } else if ((*GPIO_PC_DIN & BUTTON3) == 0) {
         vector_copy(2);
         return true;
-    }else if ((*GPIO_PC_DIN & BUTTON4) == 0) {
+    } else if ((*GPIO_PC_DIN & BUTTON4) == 0) {
         vector_copy(3);
         return true;
     }

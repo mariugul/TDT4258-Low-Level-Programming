@@ -16,7 +16,7 @@ void low_energy_init()
 /** Go in low energy mode and deepsleep */
 void sleep()
 {
-    __asm__("wfi"); // Deepsleep
+    __asm__("wfi"); // Sleep
 }
 
 /** Set in low energy mode*/

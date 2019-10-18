@@ -10,13 +10,13 @@
 /** Initialize timer **/
 void timer_init()
 {
-    
+
     timer_enable_clock();
     timer_set_prescaler();
     timer_set_period();
     timer_enable_interrupt();
     timer_start();
-    
+
     //timer_le_init(); // Set up low energy timer
 }
 
@@ -65,13 +65,12 @@ void timer_le_stop()
 
 void timer_le_init()
 {
-	*CMU_HFCORECLKEN0 |= 1 << 0x4; // Enable clock
-	*CMU_OSCENCMD |= 1 << 0x6; // Enable oscilator
-	*CMU_LFACLKEN0 = 0x4; // Enable timer
-	*LETIMER0_CTRL |= 1 << 0x9; // Free mode
-	*LETIMER0_TOP = TIMER_TOP_VALUE; // Write the top value
-	*LETIMER0_IEN = 0x1; // Enable timer interrupt
+    *CMU_HFCORECLKEN0 |= 1 << 0x4; // Enable clock
+    *CMU_OSCENCMD |= 1 << 0x6; // Enable oscilator
+    *CMU_LFACLKEN0 = 0x4; // Enable timer
+    *LETIMER0_CTRL |= 1 << 0x9; // Free mode
+    *LETIMER0_TOP = TIMER_TOP_VALUE; // Write the top value
+    *LETIMER0_IEN = 0x1; // Enable timer interrupt
     *ISER0 |= 26; // Emable Low Energy Timer interrupt
-	*LETIMER0_CMD = 0x1; // Start timer
-    
+    *LETIMER0_CMD = 0x1; // Start timer
 }

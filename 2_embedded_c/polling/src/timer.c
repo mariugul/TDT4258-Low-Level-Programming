@@ -5,8 +5,7 @@
 
 #define PRESCALER 0x00 //Prescaler for the timer (1024)
 //#define TIMER_TOP_VALUE 13672/4 // One second interrupts
-#define TIMER_TOP_VALUE 0xFFFF 
-
+#define TIMER_TOP_VALUE 0xFFFF
 
 /** Initialize timer **/
 void timer_init()
@@ -49,4 +48,3 @@ void timer_stop()
 {
     *TIMER1_CMD = 0x00; // Stop the timer
 }
-
