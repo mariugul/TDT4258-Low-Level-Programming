@@ -13,11 +13,11 @@ LINKERSCRIPT=lib/linkerscript.ld
 # All the object files
 OBJS   = build/main.o build/timer.o build/dac.o build/gpio.o build/interrupt.o build/low_energy.o build/melodies.o
 
-# Build main binary
+# Build main binary from .elf
 build/main.bin : build/main.elf
 	${OBJCOPY} -O binary $< $@
 
-# Build main elf 
+# Build main elf from .o files with linkerscript
 build/main.elf : $(OBJS)
 	${LD} -T ${LINKERSCRIPT} $^ -o $@ ${LDFLAGS} 
 
