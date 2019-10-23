@@ -1,0 +1,14 @@
+{
+    "workspace.exclude": {
+        "build": true,
+        ".vscode": true,
+        ".dist": true,
+        "lib/libefm32gg.a": true
+    },
+    "files.exclude": {
+        "build": true,
+        ".vscode": true,
+        ".dist": true,
+        "lib/libefm32gg.a": true
+    }
+}

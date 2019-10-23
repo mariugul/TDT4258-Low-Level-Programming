@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "efm32gg.h": "c"
+    },
+    "workspace.exclude": {
+        "lib/libefm32gg.a": true,
+        ".vscode": true,
+        ".dist": true,
+        "build": true
+    },
+    "files.exclude": {
+        "lib/libefm32gg.a": true,
+        ".vscode": true,
+        ".dist": true,
+        "build": true
+    }
+}

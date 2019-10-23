@@ -21,10 +21,10 @@ build/main.elf : build/main.o
 build/main.o : main.s
 	${AS} ${ASFLAGS} $< -o $@
 
-.PHONY : upload
-upload :
-	-eACommander.sh -r --address 0x00000000 -f "build/main.bin" -r
 
-.PHONY : clean
+.PHONY : All of my rules
+upload :
+	commander flash build/main.bin --address 0x0
+
 clean :
 	-rm -rf build/\*.o build/\*.elf build/\*.bin build/\*.hex

@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "C:\\Users\\Mariu\\Dropbox\\NTNU\\Fall 2019\\Low level programming\\Low-Level-Programming\\2_embedded_c\\polling"
+		}
+    ],
+    "settings": {
+        "workspace.exclude": {
+            "build": true,
+            ".vscode": true,
+            ".dist": true,
+            "lib/libefm32gg.a": true
+        },
+        "files.exclude": {
+            "build": true,
+            ".vscode": true,
+            ".dist": true,
+            "lib/libefm32gg.a": true
+        }
+    }
+}

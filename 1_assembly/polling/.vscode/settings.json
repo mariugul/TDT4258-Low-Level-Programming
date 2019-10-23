@@ -1,0 +1,12 @@
+{
+    "workspace.exclude": {
+        ".dist": true,
+        ".vscode": true,
+        "build": true
+    },
+    "files.exclude": {
+        ".dist": true,
+        ".vscode": true,
+        "build": true
+    }
+}

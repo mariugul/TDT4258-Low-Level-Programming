@@ -1,0 +1,8 @@
+{
+    "workspace.exclude": {
+        ".dist": true
+    },
+    "files.exclude": {
+        ".dist": true
+    }
+}
