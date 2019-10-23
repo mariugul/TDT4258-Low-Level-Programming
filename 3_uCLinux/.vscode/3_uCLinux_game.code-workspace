@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "C:\\Users\\Mariu\\Dropbox\\NTNU\\Fall 2019\\Low level programming\\Low-Level-Programming\\3_uCLinux"
+		}
+    ],
+    "settings": {
+        "workspace.exclude": {
+            ".dist": true,
+            ".vscode": true
+        },
+        "files.exclude": {
+            ".dist": true,
+            ".vscode": true
+        }
+    }
+}
