@@ -1,4 +1,7 @@
 # Ignore build files
-.o
-.elf
-.bin
+*.o
+*.elf
+*.bin
+
+# Ignore local folder
+term project material
