@@ -1,4 +1,4 @@
-#include <stdint.h>
+//#include <stdint.h>
 
 // GPIO
 
@@ -35,6 +35,7 @@
 #define GPIO_PC_DOUTTGL  ((volatile uint32_t*)(GPIO_PC_BASE + 0x18))
 #define GPIO_PC_DIN      ((volatile uint32_t*)(GPIO_PC_BASE + 0x1c))
 #define GPIO_PC_PINLOCKN ((volatile uint32_t*)(GPIO_PC_BASE + 0x20))
+#define READ_BUTTONS     ((volatile uint32_t*)(GPIO_PC_BASE + 0x1c + 0x3))
 
 #define GPIO_EXTIPSELL ((volatile uint32_t*)(GPIO_PA_BASE + 0x100))
 #define GPIO_EXTIPSELH ((volatile uint32_t*)(GPIO_PA_BASE + 0x104))
