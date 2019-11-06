@@ -13,5 +13,5 @@
         ".vscode": true,
         ".dist": true,
         "build": true
-    }
+    },
 }
