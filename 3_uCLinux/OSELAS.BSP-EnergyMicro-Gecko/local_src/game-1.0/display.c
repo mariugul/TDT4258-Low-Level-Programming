@@ -20,7 +20,7 @@ void display_draw_rect(uint8_t x, uint8_t y, uint8_t w, uint8_t h)
     rect.width = w;
     rect.height = h;
 }
-void display_driver_comm() {}
+
 
 void display_add_snake() {}
 
