@@ -10,7 +10,7 @@
 #include <stdbool.h>
 #include "colors.h" // Defines the color codes
 
-
+void display_driver_comm();
 void display_init();
 void display_refresh();
 void display_draw_rect(uint8_t x, uint8_t y, uint8_t w, uint8_t h);
