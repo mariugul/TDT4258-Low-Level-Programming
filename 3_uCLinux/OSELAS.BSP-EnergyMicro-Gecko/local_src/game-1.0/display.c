@@ -63,7 +63,7 @@ void display_draw_rect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint16_t colo
 	// Refresh the new part of the screen
     display_refresh(x, y, w, h);
 }
-void display_driver_comm() {}
+
 
 void display_add_snake() {}
 
