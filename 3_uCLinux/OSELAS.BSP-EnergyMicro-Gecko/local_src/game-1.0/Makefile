@@ -6,15 +6,24 @@
 # add more flags here,
 # but don't remove the "+="
 #
-CFLAGS += -O2 -g -Wall #-Wsign-compare -Wfloat-equal -Wformat-security #-Werror
-CPPFLAGS +=
-LDFLAGS +=
+
+CC = arm-cortexm3-uclinuxeabi-gcc
+CFLAGS += -O2 -g -W -Wall -std=c99
+LDFLAGS += -lm
+
+OBJS = display.o 
 
 
 all: game
 
+game: ${OBJS}
+	${CC} ${CFLAGS} game.c ${OBJS} -o game ${LDFLAGS}
+
+%.o : %.c 
+	${CC} ${CFLAGS} -c $< -o $@
+
 clean:
-	-rm -f game
+	-rm -f game *.o
 
 install:
 
