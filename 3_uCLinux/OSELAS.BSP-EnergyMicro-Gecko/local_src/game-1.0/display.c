@@ -25,7 +25,7 @@ void display_add_snake() {}
 
 void display_game_over() {}
 
-void display_star_game() {}
+void display_start_game() {}
 
 void display_snake_food() {}
 
