@@ -4,15 +4,18 @@
 
 // Variables
 //---------------------------------------------------
-bool alive;
+bool alive, food_eaten;
 int seed;
 int food_pos_x;
 int food_pos_y;
 int snake_lenght = 1;
 
+direction_t head_direction;
+direction_t tail_direction;
+
 // Function Definitions
 //---------------------------------------------------
-void snake_grow(direction dir) 
+void snake_grow(direction_t dir) 
 {
     // Choose action from the direction to grow
     switch (dir)
@@ -43,6 +46,11 @@ void snake_put_food()
 }
 
 void snake_update() 
+{
+
+}
+
+void snake_move()
 {
 
 }

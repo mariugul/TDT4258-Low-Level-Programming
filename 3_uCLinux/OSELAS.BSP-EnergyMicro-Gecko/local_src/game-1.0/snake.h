@@ -31,12 +31,12 @@ typedef enum {
     right, 
     up,
     down
-}direction;
+}direction_t;
 
 // Function Prototypes
 //---------------------------------------------------
 void snake_grow();
 void snake_put_food();
 void snake_update();
-
+void snake_move();
 #endif
