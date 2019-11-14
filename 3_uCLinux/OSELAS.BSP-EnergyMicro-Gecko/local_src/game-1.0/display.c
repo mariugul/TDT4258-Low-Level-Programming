@@ -1,24 +1,28 @@
+// Includes
+//---------------------------------------------------
 #include "display.h"
 #include <stdint.h>
 
+// Definitions
+//---------------------------------------------------
 #define FB_REFRESH 0x4680
-#define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 240
-#define SCREEN_SIZE 320*240
 
 
-// Error handler
+// Error Handler
+//---------------------------------------------------
 #define handle_error(msg) \
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
 // Variables
+//---------------------------------------------------
 int fb; 				   // Framebuffer communication
 uint16_t* map;			   // Pointer to the display memory map 
 struct fb_copyarea screen; // The area to update the screen
 struct fb_var_screeninfo vinfo;
 
 
-
+// Function Definitions
+//---------------------------------------------------
 void display_init(uint16_t color)
 {
 	// Open framebuffer communication and error check
