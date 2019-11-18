@@ -11,7 +11,7 @@ CC = arm-cortexm3-uclinuxeabi-gcc
 CFLAGS += -O2 -g -W -Wall -std=c99
 LDFLAGS += -lm
 
-OBJS = display.o 
+OBJS = display.o snake.o
 
 
 all: game
