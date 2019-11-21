@@ -28,6 +28,7 @@ void display_add_snake();
 void display_game_over();
 void display_start_game();
 void display_snake_food();
+void display_border();
 void display_set_background(uint16_t color);
 void display_close();
 

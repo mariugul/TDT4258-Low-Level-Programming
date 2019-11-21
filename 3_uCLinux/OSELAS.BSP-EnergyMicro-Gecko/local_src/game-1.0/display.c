@@ -64,14 +64,26 @@ void display_draw_rect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t 
 
 	// Draw square
 	for (int i = 0; i < h; i++) {
-
 		uint16_t row_offset = i * SCREEN_WIDTH;
 		for (int j = start_pos; j < width_offset; j++) 
 			map[j+row_offset] = color;
 	}
-
 	// Refresh the new part of the screen
     display_refresh(x, y, w, h);
+}
+
+void display_border(){
+	//Vertical border
+	for(int i = 1; i < 26;i++){
+		//display_draw_rect(0,i*8,8,8,WHITE);
+		display_draw_rect(8,i*8,8,8,WHITE);
+		display_draw_rect(38*8,i*8,8,8,WHITE);
+	}
+	//Horizontal borders
+	for(int j = 1; j < 39;j++){
+		display_draw_rect(j*8,0,8,8,WHITE);
+		display_draw_rect(j*8,25*8,8,8,WHITE);
+	}
 }
 
 void display_add_snake() {}
