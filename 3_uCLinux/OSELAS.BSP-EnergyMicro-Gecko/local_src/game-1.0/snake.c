@@ -14,16 +14,18 @@ direction_t head_direction;
 
 // Function Definitions
 
-void removeSnake(){
-    for(int i=0; i<snake_lenght;++i){
+void snake_remove()
+{
+    for(int i=0; i < snake_lenght; ++i){
         display_draw_rect(pos_snake_x[i]*8, pos_snake_y[i]*8, 8, 8, BLACK);
     }
     display_draw_rect(food_pos_x*8,food_pos_y*8,8,8,BLACK);
 }
 
-void snake_init(bool firstInit){
+void snake_init(bool first_init)
+{
     
-    if(!firstInit) removeSnake();
+    if(!first_init) snake_remove();
     //display_draw_rect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color)
     pos_snake_x[0] = 20;
     pos_snake_y[0] = 15;
@@ -44,13 +46,13 @@ void snake_init(bool firstInit){
     //}
 }
 
-void getMoreFood(){
+void snake_get_food(){
     food_pos_x = rand() % 37 + 1; //pseudo-random number between 1 and 38
     food_pos_y = rand() % 24 + 1; //pseudo-random number between 1 and 25
     display_draw_rect(food_pos_x*8,food_pos_y*8,8,8,RED);
 }
 
-void update_head_direction(direction_t bottonPressed){
+void snake_update_head_direction(direction_t bottonPressed){
     switch (head_direction) //Change head direction if needed
     {
         case up:
@@ -87,7 +89,7 @@ void update_head_direction(direction_t bottonPressed){
     }
 }
 
-bool check_game_over(){
+bool snake_check_game_over(){
     //Check if the snake is eating its tail:
     for(int i = 1; i < snake_lenght;++i){
         if(pos_snake_x[i] == pos_snake_x[0] && pos_snake_y[i] == pos_snake_y[0]){
@@ -107,13 +109,13 @@ bool check_game_over(){
 void snake_update(direction_t bottonPressed) 
 {
 
-    if(check_game_over()){
+    if(snake_check_game_over()){
         snake_init(false);
         display_border();
     }
     else{
         //Update the head direction of the snake, depending on the input
-        update_head_direction(bottonPressed);
+        snake_update_head_direction(bottonPressed);
         //Update position of the snake:
         //Erase tail of the snake
         //printf("Black1 x:%d, y: %d\n",pos_snake_x[snake_lenght-1],pos_snake_y[snake_lenght-1]);
@@ -152,7 +154,7 @@ void snake_update(direction_t bottonPressed)
             ++snake_lenght;
             pos_snake_x[snake_lenght-1] = x_tail;
             pos_snake_y[snake_lenght-1] = y_tail;
-            getMoreFood();
+            snake_get_food();
         }
     }
 }

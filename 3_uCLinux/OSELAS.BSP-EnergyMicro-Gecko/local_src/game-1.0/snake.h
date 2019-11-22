@@ -33,10 +33,12 @@ typedef enum {
 
 // Function Prototypes
 //---------------------------------------------------
-void snake_init(bool firstInit);
+void snake_init(bool first_init);
 void snake_update(direction_t bottonPressed);
 void snake_draw();
-void getMoreFood();
-void update_head_direction();
-bool check_game_over();
+void snake_get_food();
+void snake_update_head_direction();
+void snake_update(direction_t bottonPressed);
+bool snake_check_game_over();
+void snake_remove();
 #endif
