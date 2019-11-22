@@ -1,10 +1,22 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ *                  Display "driver"                     *
+ *                                                       *
+ *  This is the display drawing functions that is used   *
+ *  to display figures and text on the screen.           *
+ *														 *
+ * By: Marius C. K. Gulbrandsen                          *
+ *     Antoni Climent Munoz                              *
+ *     Andrea Mazzoli							         *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+// Includes
+//---------------------------------------------------
 #include "display.h"
-#include <stdint.h>
 
+// Definitions
+//---------------------------------------------------
 #define FB_REFRESH 0x4680
-
-// Error handler
-#define handle_error(msg) \
+#define handle_error(msg) \     
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
 // Variables
@@ -13,8 +25,8 @@ uint16_t* map;			   // Pointer to the display memory map
 struct fb_copyarea screen; // The area to update the screen
 
 
-
-
+// Function Definitions
+//---------------------------------------------------
 void display_init(uint16_t color)
 {
 	// Open framebuffer communication and error check
@@ -124,13 +136,6 @@ void display_draw_frame(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t 
 
 }
 
-void display_add_snake() {}
-
-void display_game_over() {}
-
-void display_start_game() {}
-
-void display_snake_food() {}
 
 void display_border(){
 	//Vertical border

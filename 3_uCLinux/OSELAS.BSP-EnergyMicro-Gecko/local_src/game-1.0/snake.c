@@ -1,3 +1,13 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ *                         Snake                         *
+ *                                                       *
+ *  These are the functions for controlling the snake.   *
+ *														 *
+ * By: Marius C. K. Gulbrandsen                          *
+ *     Antoni Climent Munoz                              *
+ *     Andrea Mazzoli							         *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 // Includes
 //---------------------------------------------------
 #include "snake.h"
@@ -12,8 +22,9 @@ int snake_lenght;
 
 direction_t head_direction;
 
-// Function Definitions
 
+// Function Definitions
+//---------------------------------------------------
 void snake_remove()
 {
     for(int i=0; i < snake_lenght; ++i){

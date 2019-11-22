@@ -1,3 +1,13 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ *                         Snake                         *
+ *                                                       *
+ *  These are the functions for controlling the snake.   *
+ *														 *
+ * By: Marius C. K. Gulbrandsen                          *
+ *     Antoni Climent Munoz                              *
+ *     Andrea Mazzoli							         *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 // Header Guard
 //---------------------------------------------------
 #ifndef __SNAKE_H__
@@ -33,12 +43,12 @@ typedef enum {
 
 // Function Prototypes
 //---------------------------------------------------
-void snake_init(bool first_init);
-void snake_update(direction_t bottonPressed);
 void snake_draw();
+void snake_remove();
 void snake_get_food();
+bool snake_check_game_over();
+void snake_init(bool first_init);
 void snake_update_head_direction();
 void snake_update(direction_t bottonPressed);
-bool snake_check_game_over();
-void snake_remove();
+void snake_update(direction_t bottonPressed);
 #endif
