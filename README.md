@@ -1,7 +1,11 @@
 # Low-Level Programming
-This is the term project for TDT4258 - Low-Level Programming at NTNU Trondheim, fall 2019. The practical goal of the lab exercises was to implement a small game for the EFM32 development board. This development board has a microcontroller, a display and sound. In addition, there's given a small prototype gamepad with buttons and LEDs. Together, this system provides all the hardware components which are needed for making a computer game. The task was to program the microcontroller to control all I/O–components needed for the game and use these in a computer game we implemented ourselves.
+This is the term project for TDT4258 - Low-Level Programming at NTNU Trondheim, fall 2019. The practical goal of the lab exercises was to implement a small game for the EFM32 development board. This development board has a microcontroller, a display and sound. In addition, there's given a small prototype gamepad with buttons and LEDs. Together, this system provides all the hardware components which are needed for making a computer game. The task was to program the microcontroller to control all I/O–components needed for the game and use these in a computer game we implemented ourselves. We chose to implement "snake" as our game.
 
 ![EFM32GG](images/efm32gg.png) 
+
+## Finished Game
+![EFM32GG](images/snakeGame.jpg) 
+
 
 ## Part 1. ARM Assembler
 In exercise 1, you will familiarise yourself with some of the widely used development
