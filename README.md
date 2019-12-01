@@ -3,10 +3,6 @@ This is the term project for TDT4258 - Low-Level Programming at NTNU Trondheim, 
 
 ![EFM32GG](images/efm32gg.png) 
 
-## Finished Game
-![EFM32GG](images/snakeGame.jpg) 
-
-
 ## Part 1. ARM Assembler
 In exercise 1, you will familiarise yourself with some of the widely used development
 tools from GNU. These will be used for programming in assembly code for ARM.
@@ -33,6 +29,9 @@ the development board. This time, you will install an embedded variant of the Li
 operating system on the board and make your game as a Linux application.
 The gamepad is necessary for controlling the game, so a Linux device driver must be
 implemented that communicates with the buttons and which is used by the game application. The game output will use the TFT display on the board, programmed through the Linux framebuffer device.
+
+## Finished Game
+![EFM32GG](images/snakeGame.jpg) 
 
 ## Folder structure
 The folder structure of this project was set up for easy development and maintenance. This section will explain briefly the folder structure of the project.
